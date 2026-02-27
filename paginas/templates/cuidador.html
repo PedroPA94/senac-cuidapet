@@ -1,0 +1,161 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PetCare - Cadastro de Tutor</title>
+
+  <link rel="stylesheet" href="...">
+  <link rel="stylesheet" href="...">
+  <link rel="stylesheet" href="{% static 'css/cuidador.css' %}" />
+</head>
+
+<body>
+  <main class="page">
+    <section class="wrap">
+
+      <div class="titulo">
+       
+        <h1>Cadastro de Tutor</h1>
+        <p>Crie sua conta e comece a cuidar dos seus pets com os melhores profissionais</p>
+
+      </div>
+
+      <form class="card" action="#" method="post">
+
+     
+        <section class="section">
+          <div class="section-int">
+            <h2>Dados Pessoais</h2>
+          </div>
+
+          <div >
+            <div class="borda">
+              <p class="texto">Nome Completo</p>
+              <div class="input">
+            
+                <input type="text" placeholder="João da Silva" required />
+              </div>
+            </div>
+
+            <div class="borda">
+              <p class="texto">CPF </p>
+              <div class="input">
+                
+                <input type="text" placeholder="000.000.000-00" required />
+              </div>
+            </div>
+
+            <div class="borda">
+              <p class="texto">Celular </p>
+              <div class="input">
+                
+                <input type="text" placeholder="(00) 00000-0000" required />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        
+        <section class="section">
+          <div class="section-int">
+            <h2>Acesso</h2>
+          </div>
+
+          <div>
+            <div class="field col-2">
+              <p class="texto">E-mail </p>
+              <div class="input">
+                
+                <input type="email" placeholder="seu@email.com" required />
+              </div>
+            </div>
+
+            <div class="field">
+              <p class="texto">Senha </p>
+              <div class="input">
+                
+                <input type="password" placeholder="********" minlength="8" required />
+              </div>
+            
+            </div>
+
+            <div class="borda">
+              <p class="texto">Confirmar Senha </p>
+              <div class="input">
+                
+                <input type="password" placeholder="********" minlength="8" required />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        
+        <section class="section">
+          <div>
+            <div>
+              <h2>Cadastre seus Pets</h2>
+              <p>Adicione informações sobre os pets que você cuida</p>
+            </div>
+          </div>
+
+          <div >
+
+            <div>
+              <div class="borda">
+                <p class="texto">Nome do Pet </p>
+                <div class="input">
+                 
+                  <input type="text" placeholder="Ex: Mel, Thor" required />
+                </div>
+            </div>
+
+              <div class="borda">
+                <p class="texto">Espécie </p>
+                <div class="input">
+                
+                  <select required>
+                    <option value="" selected disabled>Selecione a espécie</option>
+                    <option>Cão</option>
+                    <option>Gato</option>
+                    <option>Outro</option>
+                  </select>
+                </div>
+            </div>
+
+              <div class="borda">
+                <p class="texto">Raça</p>
+                <div class="input">
+                  
+                  <input type="text" placeholder="Ex: Golden, Persa, SRD" />
+                </div>
+            </div>
+
+              <label class="borda">
+                <p class="texto">Data de Nascimento</p>
+                <div class="input">
+                  
+                  <input type="date" />
+                </div>
+              </label>
+            </div>
+          </div>
+
+        </section>
+
+        <div class="actions">
+          <a href="/src/pages/pagina1-cadastro/index.html">Voltar</a>
+          <button type="submit">Finalizar</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+</body>
+</html>

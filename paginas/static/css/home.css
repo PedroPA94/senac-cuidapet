@@ -1,0 +1,166 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins', sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+
+
+.barra{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:18px 60px;
+    background:white;
+
+}
+
+
+.principal{
+    background:linear-gradient(180deg,#2b59ff,#1c3fd1);
+    height:420px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    
+}
+
+.principal h1{
+    font-size:42px;
+    max-width:700px;
+    margin-bottom:15px;
+}
+
+.principal p{
+   
+    margin-bottom:30px;
+}
+
+/* SEARCH */
+
+.box{
+    background:white;
+    padding:12px;
+    border-radius:14px;
+    display:flex;
+    gap:10px;
+    width:520px;
+    margin:auto;
+}
+
+.box input{
+    flex:1;
+    border:none;
+    background:#f1f3f7;
+    padding:12px;
+    border-radius:10px;
+}
+
+.btn{
+    background:#2b59ff;
+    color:white;
+    border:none;
+    padding:12px 20px;
+    border-radius:10px;
+    cursor:pointer;
+}
+
+/* CARDS */
+
+.cards{
+    display:flex;
+    gap:25px;
+    padding:0 60px 60px;
+    margin-top:100px;
+}
+
+.card{
+    background:white;
+    border-radius:16px;
+    overflow:hidden;
+    width:300px;
+    position:relative;
+}
+
+.card img{
+    width:100%;
+    height:200px;
+    object-fit:cover;
+}
+
+.card h3{
+    padding:12px 15px 5px;
+}
+
+.card p{
+    padding:0 15px 15px;
+    color:#777;
+}
+img { 
+    max-width: 100%; display: block; 
+}
+@media (max-width: 1024px) {
+  .barra {
+    padding: 16px 24px;
+  }
+
+  .principal {
+    height: 380px;
+    padding: 0 18px;
+  }
+ .cards {
+    padding: 0 24px 50px;
+    display: grid;
+   
+  }
+.card {
+    width: 100%;
+  }
+}
+@media (max-width: 640px) {
+  /* Navbar compacta */
+  .barra {
+    padding: 14px 14px;
+    gap: 10px;
+  }
+.principal {
+    height: auto;
+    padding: 34px 14px 28px;
+  }
+.box {
+    width: 100%;
+    padding: 10px;
+    border-radius: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .box input {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .btn {
+    width: 100%;
+    padding: 12px;
+  }
+  .cards {
+    padding: 0 14px 40px;
+    display: grid;
+  }
+
+  .card {
+    width: 100%;
+  }
+
+  .card img {
+    height: 190px;
+  }
+}
