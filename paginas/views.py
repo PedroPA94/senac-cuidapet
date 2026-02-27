@@ -4,6 +4,9 @@ from django.http import HttpResponse
 def index(request):
     return HttpResponse("tatu")
 
+def login(request):
+    return render(request, 'login.html')
+
 def cadastro(request):
     return render(request, 'cadastro.html')
 
@@ -13,3 +16,5 @@ def home(request):
 def cuidador(request):
     return render(request, 'cuidador.html')
 
+def tutor(request):
+    return render(request, 'tutor.html')

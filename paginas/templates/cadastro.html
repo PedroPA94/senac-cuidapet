@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetCare - Login</title>
+  <title>PetCare - Cadastro</title>
 
   <link rel="stylesheet" href="...">
   <link rel="stylesheet" href="...">
@@ -20,31 +20,16 @@
 
 
       <h1>Bem-vindo ao CuidaPet</h1>
-      <p class="subt">Entre ou crie sua conta para continuar</p>
+      <p class="subt">Selecione qual tipo de usuário você será!</p>
 
-    
-      <form class="form" action="#" method="post">
-        <div class="campo">
-          <p class="texto">E-mail</p>
-          <div class="input-classe">
-         
-            <input type="email" placeholder="seu@email.com" required />
-          </div>
-        </div>
-
-        <div class="campo">
-          <p class="texto">Senha</p>
-          <div class="input-classe">
-         
-            <input type="password" placeholder="********" required />
-          </div>
-        </div>
-
-
-        <button type="submit">Entrar</button>
-
-        
-        <a  href="...">Criar conta</a>
+        <a href="{% url 'tutor' %}" class="btna">
+        Cadastrar como Tutor
+        </a>
+        <a href="{% url 'cuidador' %}" class="btna">
+        Cadastrar como Cuidador
+        </a>
+        <hr>
+        <a href="{% url 'login' %}">Fazer Login</a>
       </form>
 
     

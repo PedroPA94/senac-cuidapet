@@ -84,31 +84,6 @@ button{
   cursor:pointer;
 }
 
-.btna{
-  display: inline-block;
-  width: 100%;
-  text-align: center;
-
-  background-color: #2563eb;
-  color: #ffffff;
-
-  padding: 12px;
-  padding-right: 0px;
-  padding-left: 0px;
-  border-radius: 10px;
-
-  font-size: 13px;
-  font-weight: 700;
-  text-decoration: none;
-
-  cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-.btna:hover{
-  background-color: #1e4ed8;
-}
-
 a{
   display:block;
   text-align:center;
@@ -118,6 +93,7 @@ a{
   color:#2563eb;
   text-decoration:none;
 }
+
 @media (max-width: 420px){
   .page{
     padding: 18px 12px;

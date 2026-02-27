@@ -5,11 +5,11 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PetCare - Cadastro de Cuidador</title>
+  <title>PetCare - Cadastro de Tutor</title>
 
   <link rel="stylesheet" href="...">
   <link rel="stylesheet" href="...">
-  <link rel="stylesheet" href="{% static 'css/cuidador.css' %}" />
+  <link rel="stylesheet" href="{% static 'css/tutor.css' %}" />
 </head>
 
 <body>
@@ -18,8 +18,8 @@
 
       <div class="titulo">
        
-        <h1>Cadastro de Cuidador</h1>
-        <p>Crie sua conta e comece a cuidar dos pets de seus clientes</p>
+        <h1>Cadastro de Tutor</h1>
+        <p>Crie sua conta e comece a cuidar dos seus pets com os melhores profissionais</p>
 
       </div>
 
@@ -53,24 +53,6 @@
               <div class="input">
                 
                 <input type="text" placeholder="(00) 00000-0000" required />
-              </div>
-            </div>
-          </div>
-
-          <div class="borda">
-              <p class="texto">UF </p>
-              <div class="input">
-                
-                <input type="text" placeholder="São Paulo" required />
-              </div>
-            </div>
-          </div>
-
-          <div class="borda">
-              <p class="texto">Cidade </p>
-              <div class="input">
-                
-                <input type="text" placeholder="São Paulo" required />
               </div>
             </div>
           </div>
@@ -118,8 +100,8 @@
         <section class="section">
           <div>
             <div>
-              <h2>Cuidador</h2>
-              <p>Diga a seus clientes quem você é, conte sua história, por que eles deixaram seus pets com você!</p>
+              <h2>Cadastre seus Pets</h2>
+              <p>Adicione informações sobre os pets que você cuida</p>
             </div>
           </div>
 
@@ -127,34 +109,42 @@
 
             <div>
               <div class="borda">
-                <p class="texto">Sobre mim</p>
+                <p class="texto">Nome do Pet </p>
                 <div class="input">
                  
-                  <input type="text" placeholder="..." required />
+                  <input type="text" placeholder="Ex: Mel, Thor" required />
                 </div>
             </div>
 
-            <div class="borda">
-              <p class="texto">Serviço Prestado</p>
-              <div class="input">
-                
-                <select required>
-                  <option value="" selected disabled>Selecione o tipo de serviço</option>
-                  <option>Banho e Tosa</option>
-                  <option>Veterinário</option>
-                  <option>Passeio</option>
-                </select>
-              </div>
-            
-              <div>
               <div class="borda">
-                <p class="texto">Dias Disponíveis</p>
+                <p class="texto">Espécie </p>
                 <div class="input">
-                 
-                  <input type="text" placeholder="ex.: Segunda-feira | Quinta-feira" required />
+                
+                  <select required>
+                    <option value="" selected disabled>Selecione a espécie</option>
+                    <option>Cão</option>
+                    <option>Gato</option>
+                    <option>Outro</option>
+                  </select>
                 </div>
             </div>
 
+              <div class="borda">
+                <p class="texto">Raça</p>
+                <div class="input">
+                  
+                  <input type="text" placeholder="Ex: Golden, Persa, SRD" />
+                </div>
+            </div>
+
+              <label class="borda">
+                <p class="texto">Data de Nascimento</p>
+                <div class="input">
+                  
+                  <input type="date" />
+                </div>
+              </label>
+            </div>
           </div>
 
         </section>
