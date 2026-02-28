@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 def index(request):
-    return HttpResponse("tatu")
+    return render(request, 'home.html')
 
 def login(request):
     return render(request, 'login.html')
@@ -18,3 +18,6 @@ def cuidador(request):
 
 def tutor(request):
     return render(request, 'tutor.html')
+
+def agendamento(request):
+    return render(request, 'agendamento.html')
