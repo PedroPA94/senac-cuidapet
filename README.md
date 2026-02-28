@@ -8,7 +8,7 @@ O presente trabalho é parte da disciplina **“Projeto Integrador: Desenvolvime
 
 A prova de conceito tem como objetivo validar o fluxo principal do sistema, permitindo que tutores:
 
-* Se cadastrem na plataforma
+* Se cadastrar na plataforma
 * Cadastrem seus pets
 * Realizem agendamentos
 * Deixem avaliações
