@@ -1,54 +1,43 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <title>PetCare - Cadastro</title>
-
-  <link rel="stylesheet" href="...">
-  <link rel="stylesheet" href="...">
-  <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
-
-  
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PetCare - Cadastro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="css/cadastro.css" />
 </head>
-
 <body>
-   <header class="navbar">
+<header class="navbar">
     <div class="logo">
-         <span>
+        <span>
             <i class="fa-solid fa-paw"></i>
             CuidaPet
-         </span>
+        </span>
     </div>
-  </header>
-  <main class="princ">
+</header>
+
+<main class="princ">
     <section class="card" aria-label="Login CuidaPet">
+        <h1>Bem-vindo ao CuidaPet</h1>
+        <p class="subt">Selecione qual tipo de usuário você será!</p>
 
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Cadastrar</button>
+        </form>
 
-      <h1>Bem-vindo ao CuidaPet</h1>
-      <p class="subt">Selecione qual tipo de usuário você será!</p>
+        <a href="{% url 'tutor' %}" class="btna">Cadastrar como Tutor</a>
+        <a href="{% url 'cuidador' %}" class="btna">Cadastrar como Cuidador</a>
 
-        <a href="{% url 'tutor' %}" class="btna">
-        Cadastrar como Tutor
-        </a>
-        <a href="{% url 'cuidador' %}" class="btna">
-        Cadastrar como Cuidador
-        </a>
         <hr>
         <a href="{% url 'login' %}">Fazer Login</a>
-      </form>
-
-    
     </section>
-  </main>
+</main>
 
-  <footer >
-        <p>@Copyright 2026 - CuidaPet</p>
- </footer>
- 
+<footer>
+    <p>@Copyright 2026 - CuidaPet</p>
+</footer>
 </body>
 </html>
