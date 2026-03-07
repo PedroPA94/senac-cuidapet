@@ -29,7 +29,7 @@
         <p>Crie sua conta e comece a cuidar dos pets de seus clientes</p>
       </div>
 
-      <form class="card" method="post">
+      <form class="card" method="post" enctype="multipart/form-data">
         {% csrf_token %}
 
         {% if usuario_form.non_field_errors %}
@@ -175,6 +175,14 @@
                   {{ cuidador_form.servicos.errors.0 }}
                 </p>
               {% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.foto.label }}</p>
+              <div class="input">
+                {{ cuidador_form.foto }}
+              </div>
+              {% if cuidador_form.foto.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.foto.errors.0 }}</p>{% endif %}
             </div>
           </div>
         </section>

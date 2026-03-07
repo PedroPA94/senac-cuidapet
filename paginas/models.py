@@ -84,6 +84,7 @@ class Cuidador(models.Model):
     valor_diaria = models.DecimalField(max_digits=10, decimal_places=2, null=False, blank=False)
     cidade = models.CharField(max_length=50, null=False, blank=False)
     uf = models.CharField(max_length=2, choices=UF.choices, null=False, blank=False)
+    foto = models.ImageField(upload_to='cuidadores/', null=True, blank=True)
 
     def __str__(self):
         return f"Cuidador: {self.usuario.nome or self.usuario.username}"

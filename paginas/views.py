@@ -44,7 +44,31 @@ def cadastro(request):
 
 
 def home(request):
-    return render(request, 'home.html')
+    """Página inicial com lista de cuidadores e filtros"""
+    # Obter parâmetros de filtro
+    uf_filtro = request.GET.get('uf', '')
+    cidade_filtro = request.GET.get('cidade', '')
+    
+    # Query base - todos os cuidadores
+    cuidadores = Cuidador.objects.all()
+    
+    # Aplicar filtros
+    if uf_filtro:
+        cuidadores = cuidadores.filter(uf=uf_filtro)
+    if cidade_filtro:
+        cuidadores = cuidadores.filter(cidade__icontains=cidade_filtro)
+    
+    # Ordenar por nome do usuário
+    cuidadores = cuidadores.select_related('usuario').order_by('usuario__first_name')
+    
+    context = {
+        'cuidadores': cuidadores,
+        'uf_filtro': uf_filtro,
+        'cidade_filtro': cidade_filtro,
+        'ufs': Cuidador.UF.choices
+    }
+    
+    return render(request, 'home.html', context)
 
 
 class TutorCreateView(View):

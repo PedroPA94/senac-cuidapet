@@ -149,11 +149,12 @@ class CuidadorForm(forms.ModelForm):
 
     class Meta:
         model = Cuidador
-        fields = ["uf", "cidade", "descricao", "valor_diaria", "servicos"]
+        fields = ["uf", "cidade", "descricao", "valor_diaria", "foto", "servicos"]
         labels = {
             "uf": "UF",
             "descricao": "Descrição",
-            "valor_diaria": "Valor diária"
+            "valor_diaria": "Valor diária",
+            "foto": "Foto de Perfil"
         }
         widgets = {
             "uf": forms.Select(),
@@ -167,6 +168,9 @@ class CuidadorForm(forms.ModelForm):
             "valor_diaria": forms.NumberInput(attrs={
                 "placeholder": "100.00",
                 "step": "0.01"
+            }),
+            "foto": forms.FileInput(attrs={
+                "accept": "image/*"
             }),
         }
 

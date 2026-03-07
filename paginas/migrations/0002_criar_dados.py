@@ -32,7 +32,7 @@ def criar_dados(apps, schema_editor):
         descricao="Cuido com muito carinho",
         valor_diaria=Decimal("80.00"),
         cidade="São Paulo",
-        uf="SP"
+        uf="SP",
     )
 
     cuidador.servicos.add(hospedagem, passeio, visita, daycare)
