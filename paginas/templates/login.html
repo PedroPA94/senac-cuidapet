@@ -1,0 +1,70 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>PetCare - Login</title>
+
+  <link rel="stylesheet" href="...">
+  <link rel="stylesheet" href="...">
+  <link rel="stylesheet" href="{% static 'css/login.css' %}" />
+
+  
+</head>
+
+<body>
+   <header class="navbar">
+    <div class="logo">
+         <span>
+            <i class="fa-solid fa-paw"></i>
+            CuidaPet
+         </span>
+    </div>
+  </header>
+  <main class="princ">
+    <section class="card" aria-label="Login CuidaPet">
+
+
+      <h1>Bem-vindo de volta ao CuidaPet!</h1>
+      <p class="subt">Entre em sua conta para continuar</p>
+
+    
+      <form class="form" action="#" method="post">
+        <div class="campo">
+          <p class="texto">E-mail</p>
+          <div class="input-classe">
+         
+            <input type="email" placeholder="seu@email.com" required />
+          </div>
+        </div>
+
+        <div class="campo">
+          <p class="texto">Senha</p>
+          <div class="input-classe">
+         
+            <input type="password" placeholder="********" required />
+          </div>
+        </div>
+
+
+        <button type="submit">Entrar</button>
+
+        
+        <a href="{% url 'cadastro' %}">Criar conta</a>
+      </form>
+
+    
+    </section>
+    
+  </main>
+
+  <footer >
+        <p>@Copyright 2026 - CuidaPet</p>
+ </footer>
+  
+</body>
+</html>
