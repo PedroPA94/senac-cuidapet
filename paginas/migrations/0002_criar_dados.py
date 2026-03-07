@@ -5,12 +5,12 @@ from datetime import datetime
 
 
 def criar_dados(apps, schema_editor):
-    Usuario = apps.get_model('core', 'Usuario')
-    Cuidador = apps.get_model('core', 'Cuidador')
-    Servico = apps.get_model('core', 'Servico')
-    Disponibilidade = apps.get_model('core', 'Disponibilidade')
-    Agendamento = apps.get_model('core', 'Agendamento')
-    Avaliacao = apps.get_model('core', 'Avaliacao')
+    Usuario = apps.get_model('paginas', 'Usuario')
+    Cuidador = apps.get_model('paginas', 'Cuidador')
+    Servico = apps.get_model('paginas', 'Servico')
+    Disponibilidade = apps.get_model('paginas', 'Disponibilidade')
+    Agendamento = apps.get_model('paginas', 'Agendamento')
+    Avaliacao = apps.get_model('paginas', 'Avaliacao')
 
     # Criar serviços
     hospedagem = Servico.objects.create(descricao="Hospedagem")
@@ -54,7 +54,7 @@ def criar_dados(apps, schema_editor):
     )
 
     # Criar pet
-    Pet = apps.get_model('core', 'Pet')
+    Pet = apps.get_model('paginas', 'Pet')
     pet = Pet.objects.create(
         usuario=tutor,
         nome="Rex",
@@ -85,7 +85,7 @@ def criar_dados(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('core', '0001_initial'),
+        ('paginas', '0001_initial'),
     ]
 
     operations = [

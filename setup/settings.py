@@ -38,7 +38,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'paginas',
-    'core'
 ]
 
 MIDDLEWARE = [
@@ -100,7 +99,7 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-AUTH_USER_MODEL = 'core.Usuario'
+AUTH_USER_MODEL = 'paginas.Usuario'
 
 
 # Internationalization
