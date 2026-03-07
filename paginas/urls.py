@@ -15,8 +15,8 @@ urlpatterns = [
     path('cuidador/register/', views.CuidadorCreateView.as_view(), name='cuidador_create'),
         
     # Agendamentos
+    path('agendamentos/', views.AgendamentoListView.as_view(), name='agendamento_list'),
     path('agendamentos/novo/<int:cuidador_id>/', views.AgendamentoCreateView.as_view(), name='agendamento_create'),
-    path('agendamento/', views.agendamento, name='agendamento'),  # backward compatibility
     
     # Avaliações
     path('avaliacoes/<int:agendamento_id>/', views.AvaliacaoCreateView.as_view(), name='avaliacao_create'),

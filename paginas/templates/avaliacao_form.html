@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliar Serviço</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/avaliacao.css' %}" />
     <style>
         .error-messages { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
     </style>
@@ -15,10 +15,12 @@
 <body>
     <header class="navbar">
         <div class="logo">
-            <span>
-                <i class="fa-solid fa-paw"></i>
-                CuidaPet
-            </span>
+          <a href="{% url 'home' %}">
+              <span>
+                  <i class="fa-solid fa-paw"></i>
+                  CuidaPet
+              </span>
+          </a>
         </div>
     </header>
 
@@ -43,16 +45,16 @@
                     </div>
                 {% endif %}
                 
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.nota.label }}</label>
+                <div class="nota">
+                    <label><strong>{{ form.nota.label }}</strong></label>
                     {{ form.nota }}
                     {% if form.nota.errors %}
                         <span class="error-messages">{{ form.nota.errors.0 }}</span>
                     {% endif %}
                 </div>
                 
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.comentario.label }}</label>
+                <div>
+                    <label><strong>{{ form.comentario.label }}</strong></label>
                     {{ form.comentario }}
                     {% if form.comentario.errors %}
                         <span class="error-messages">{{ form.comentario.errors.0 }}</span>

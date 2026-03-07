@@ -1,0 +1,102 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>CuidaPet - Meus Agendamentos</title>
+
+  <link rel="stylesheet" href="{% static 'css/agendamento_list.css' %}" />
+  
+</head>
+
+<body>
+  <header class="navbar">
+    <div>
+      <a href="{% url 'home' %}">
+          <span>
+              <i class="fa-solid fa-paw"></i>
+              CuidaPet
+          </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      <h1>Meus Agendamentos</h1>
+      <a href="{% url 'home' %}" class="back-button">
+        ← Voltar para Home
+      </a>
+
+      {% if agendamentos %}
+        <div class="agendamentos-grid">
+          {% for agendamento in agendamentos %}
+            <div class="agendamento-card">
+              <div class="card-header">
+                <div>
+                  <h3 class="card-title">{{ agendamento.cuidador.usuario.first_name }}</h3>
+                  <p class="card-pet">Pet: <strong>{{ agendamento.pet.nome }}</strong></p>
+                </div>
+                <span class="badge">{{ agendamento.get_forma_pagamento_display }}</span>
+              </div>
+
+              <div class="card-dates">
+                <div class="date-item">
+                  <p>Data de início</p>
+                  <p>{{ agendamento.data_inicio|date:"d/m/Y" }}</p>
+                </div>
+                <div class="date-item">
+                  <p>Data final</p>
+                  <p>{{ agendamento.data_fim|date:"d/m/Y" }}</p>
+                </div>
+              </div>
+
+              <div class="card-info">
+                <div class="info-grid">
+                  <div class="info-item">
+                    <p>Valor total</p>
+                    <p class="valor-total">R$ {{ agendamento.valor_total }}</p>
+                  </div>
+                  <div class="info-item">
+                    <p>Localização</p>
+                    <p>{{ agendamento.cuidador.cidade }}/{{ agendamento.cuidador.uf }}</p>
+                  </div>
+                </div>
+              </div>
+
+              {% if agendamento.avaliacao %}
+                <div class="avaliacao-container">
+                  <p class="avaliacao-title">Avaliação deixada</p>
+                  <p class="avaliacao-nota">Nota: {{ agendamento.avaliacao.nota }}/5</p>
+                </div>
+              {% else %}
+                <a href="{% url 'avaliacao_create' agendamento.id %}" class="avaliar-button">
+                  Deixar Avaliação
+                </a>
+              {% endif %}
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <div class="empty-state">
+          <p>Você não possui agendamentos ainda.</p>
+          <a href="{% url 'home' %}" class="cta-button">
+            Agendar um Cuidador
+          </a>
+        </div>
+      {% endif %}
+
+      <footer>
+        <p>@Copyright 2026 - CuidaPet</p>
+      </footer>
+    
+    </div>
+  </main>
+
+</body>
+</html>

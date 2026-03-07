@@ -3,86 +3,239 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Novo Agendamento</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
-    <style>
-        .error-messages { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+  <title>CuidaPet - Novo Agendamento</title>
+
+  <link rel="stylesheet" href="{% static 'css/agendamento.css' %}" />
+  <style>
+    .form-errors { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
+  </style>
+  
 </head>
+
 <body>
-    <header class="navbar">
-        <div class="logo">
-            <span>
-                <i class="fa-solid fa-paw"></i>
-                CuidaPet
-            </span>
+  <header class="navbar">
+    <div>
+      <a href="{% url 'home' %}">
+          <span>
+              <i class="fa-solid fa-paw"></i>
+              CuidaPet
+          </span>
+      </a>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+
+      {% if cuidador %}
+      <!-- Perfil do Cuidador -->
+      <section class="profile-card">
+        <div class="cuidador">
+          {% if cuidador.foto %}
+            <img src="{{ cuidador.foto.url }}" alt="{{ cuidador.usuario.first_name }}" />
+          {% else %}
+            <img src="https://www.petz.com.br/blog/wp-content/uploads/2023/06/dia-do-pet-sitter5.webp" alt="{{ cuidador.usuario.first_name }}">
+          {% endif %}
         </div>
-    </header>
 
-    <main class="princ">
-        <section class="card">
-            {% if cuidador %}
-                <h1>Novo Agendamento com {{ cuidador.usuario.first_name }}</h1>
-            {% else %}
-                <h1>Novo Agendamento</h1>
-            {% endif %}
-            
-            <form method="post">
-                {% csrf_token %}
-                
-                {% if form.non_field_errors %}
-                    <div style="color: #d32f2f; margin-bottom: 1rem;">
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
+        <div class="info">
+          <h1>{{ cuidador.usuario.first_name }}</h1>
+
+          <div class="meta">
+            <div>
+              <h4>{{ cuidador.cidade }}</h4> 
+              <h4>{{ cuidador.uf }}</h4>
+            </div>
+          </div>
+
+          <div class="divside">
+            <p class="diaria-statico">Diária</p>
+            <div class="price">
+             <p class="simb">R$ &nbsp;</p> <p class="valor">{{ cuidador.valor_diaria }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="grid">
+        
+        <!-- Sobre o Cuidador -->
+        <div class="infor">
+          <h2>Sobre mim</h2>
+          <p class="servico">{{ cuidador.descricao }}</p>
+        </div>
+
+        <!-- Serviços Oferecidos -->
+        <div class="infor">
+          <h2>Serviços oferecidos</h2>
+          <ul class="servico">
+            {% for servico in cuidador.servicos.all %}
+              <li>{{ servico }}</li>
+            {% empty %}
+              Nenhum serviço especificado
+            {% endfor %}
+          </ul>
+        </div>
+
+        <!-- Formulário de Agendamento -->
+        <div class="box reserve infor">
+          <h2>Novo Agendamento</h2>
+
+          {% if form.non_field_errors %}
+            <div style="color: #d32f2f; margin-bottom: 1rem;">
+              {% for error in form.non_field_errors %}
+                <p>{{ error }}</p>
+              {% endfor %}
+            </div>
+          {% endif %}
+
+          <form method="post">
+            {% csrf_token %}
+
+            <!-- Seleção de Pet -->
+            <div style="margin-bottom: 1.5rem;">
+              <p class="datas">{{ form.pet.label }}</p>
+              <div class="input">
+                {{ form.pet }}
+                {% if form.pet.errors %}
+                  <span class="form-errors">{{ form.pet.errors.0 }}</span>
                 {% endif %}
-                
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.pet.label }}</label>
-                    {{ form.pet }}
-                    {% if form.pet.errors %}
-                        <span class="error-messages">{{ form.pet.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.data_inicio.label }}</label>
-                    {{ form.data_inicio }}
-                    {% if form.data_inicio.errors %}
-                        <span class="error-messages">{{ form.data_inicio.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.data_fim.label }}</label>
-                    {{ form.data_fim }}
-                    {% if form.data_fim.errors %}
-                        <span class="error-messages">{{ form.data_fim.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <div style="margin-bottom: 1rem;">
-                    <label>{{ form.forma_pagamento.label }}</label>
-                    {{ form.forma_pagamento }}
-                    {% if form.forma_pagamento.errors %}
-                        <span class="error-messages">{{ form.forma_pagamento.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <p><small>Nota: O valor total será calculado automaticamente (número de dias × valor da diária).</small></p>
-                
-                <button type="submit">Confirmar</button>
-                <a href="{% url 'agendamento_list' %}" class="btna">Cancelar</a>
-            </form>
-        </section>
-    </main>
+              </div>
+            </div>
 
-    <footer>
+            <!-- Datas -->
+            <div class="form-grid">
+              <div>
+                <p class="datas">{{ form.data_inicio.label }}</p>
+                <div class="input">
+                  {{ form.data_inicio }}
+                  {% if form.data_inicio.errors %}
+                    <span class="form-errors">{{ form.data_inicio.errors.0 }}</span>
+                  {% endif %}
+                </div>
+              </div>
+
+              <div>
+                <p class="datas">{{ form.data_fim.label }}</p>
+                <div class="input">
+                  {{ form.data_fim }}
+                  {% if form.data_fim.errors %}
+                    <span class="form-errors">{{ form.data_fim.errors.0 }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+
+            <!-- Totais -->
+            <div class="totals">
+              <div class="total-row">
+                <h3>Dias</h3>
+                <p id="dias-count">0</p>
+              </div>
+
+              <div class="total-row">
+                <h3>Valor total</h3>
+                <div class="price">
+                  <h4>R$ </h4> <p id="valor-total">0,00</p>
+                </div>
+              </div>
+
+              <p class="tiny">O total é calculado automaticamente: diária × número de dias.</p>
+            </div>
+
+            <!-- Forma de Pagamento -->
+            <div class="pagar">
+              <h2 class="label">{{ form.forma_pagamento.label }}</h2>
+              {{ form.forma_pagamento }}
+              {% if form.forma_pagamento.errors %}
+                <span class="form-errors">{{ form.forma_pagamento.errors.0 }}</span>
+              {% endif %}
+            </div>
+
+            <div class="check">
+              <input id="sharePhone" type="checkbox">
+              <h4>Autorizo disponibilizar meu número de telefone para o cuidador</h4>
+            </div>
+
+            <!-- Botões -->
+            <div class="actions">
+              <button type="submit" class='btn'>AGENDAR</button>
+            </div>
+          </form>
+
+        </div>
+
+        <!-- Avaliações do Cuidador -->
+        <div class="box reviews infor">
+          <h2>Avaliações</h2>
+          
+          {% for agendamento in cuidador.agendamentos.all %}
+            {% if agendamento.avaliacao %}
+              <div class="review">
+                <div class="review-top">
+                  <div class="price">
+                    <p class="note">Nota: &nbsp;</p>
+                    <p class="note">{{ agendamento.avaliacao.nota }}/5</p>
+                  </div>
+                  <p class="date">{{ agendamento.avaliacao.data_criacao|date:"d/m/Y" }}</p>
+                </div>
+                <p class="comment">{{ agendamento.avaliacao.comentario }}</p>
+              </div>
+            {% endif %}
+          {% empty %}
+            <p style="color:#999;">Nenhuma avaliação ainda.</p>
+          {% endfor %}
+
+        </div>
+
+      </section>
+
+      <div class="actions">
+        <a href="{% url 'home' %}" class="btn btn-voltar">VOLTAR</a>
+      </div>
+
+      {% else %}
+        <p style="text-align:center; padding:40px; color:#666;">Cuidador não encontrado.</p>
+      {% endif %}
+
+      <footer>
         <p>@Copyright 2026 - CuidaPet</p>
-    </footer>
+      </footer>
+    
+    </div>
+  </main>
+
+  <script>
+    // Cálculo automático de dias e valor total
+    const dataInicio = document.querySelector('[name="data_inicio"]');
+    const dataFim = document.querySelector('[name="data_fim"]');
+    const diasCount = document.getElementById('dias-count');
+    const valorTotal = document.getElementById('valor-total');
+    const valorDiaria = parseFloat('{{ cuidador.valor_diaria|default:0 }}');
+
+    console.log('{{ cuidador.servicos.all }}')
+
+    function calcularTotal() {
+      if (dataInicio.value && dataFim.value) {
+        const inicio = new Date(dataInicio.value + 'T00:00:00');
+        const fim = new Date(dataFim.value + 'T00:00:00');
+        const dias = Math.ceil((fim - inicio) / (1000 * 60 * 60 * 24)) + 1;
+        
+        if (dias > 0) {
+          diasCount.textContent = dias;
+          const total = (dias * valorDiaria).toFixed(2);
+          valorTotal.textContent = total.replace('.', ',');
+        }
+      }
+    }
+
+    dataInicio.addEventListener('change', calcularTotal);
+    dataFim.addEventListener('change', calcularTotal);
+  </script>
+
 </body>
 </html>

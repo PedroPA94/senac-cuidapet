@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, FormView, View
+from django.views.generic import CreateView, UpdateView, FormView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
@@ -137,7 +137,7 @@ class CuidadorCreateView(View):
     
     def post(self, request):
         usuario_form = CuidadorRegistroForm(request.POST)
-        cuidador_form = CuidadorForm(request.POST)
+        cuidador_form = CuidadorForm(request.POST, request.FILES)
         
         usuario_valid = usuario_form.is_valid()
         cuidador_valid = cuidador_form.is_valid()
@@ -194,7 +194,7 @@ class AgendamentoCreateView(LoginRequiredMixin, FormView):
         forma_pagamento = form.cleaned_data['forma_pagamento']
 
         # Calcular valor total (dias × valor_diaria)
-        dias = (data_fim - data_inicio).days
+        dias = (data_fim - data_inicio).days + 1
         if dias <= 0:
             dias = 1
         valor_total = Decimal(dias) * cuidador.valor_diaria
@@ -218,6 +218,16 @@ class AgendamentoCreateView(LoginRequiredMixin, FormView):
         cuidador_id = self.kwargs.get('cuidador_id')
         context['cuidador'] = get_object_or_404(Cuidador, id=cuidador_id)
         return context
+
+
+class AgendamentoListView(LoginRequiredMixin, ListView):
+    """Listar agendamentos do usuário logado"""
+    model = Agendamento
+    template_name = 'agendamento_list.html'
+    context_object_name = 'agendamentos'
+
+    def get_queryset(self):
+        return Agendamento.objects.filter(usuario=self.request.user).select_related('cuidador', 'pet').order_by('-data_criacao')
 
 
 class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
@@ -244,16 +254,3 @@ class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
         form.instance.agendamento = agendamento
         messages.success(self.request, "Avaliação enviada com sucesso!")
         return super().form_valid(form)
-
-
-# Backward compatibility (antigas views)
-def cuidador(request):
-    return redirect('cuidador_create')
-
-
-def tutor(request):
-    return redirect('tutor_create')
-
-
-def agendamento(request):
-    return render(request, 'agendamento.html')

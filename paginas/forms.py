@@ -180,14 +180,19 @@ class AgendamentoForm(forms.ModelForm):
     class Meta:
         model = Agendamento
         fields = ["pet", "forma_pagamento", "data_inicio", "data_fim"]
+        labels = {
+            "forma_pagamento": "Forma de pagamento",
+            "data_inicio": "Data de início",
+            "data_fim": "Data final"
+        }
         widgets = {
             "pet": forms.Select(),
-            "forma_pagamento": forms.Select(),
-            "data_inicio": forms.DateTimeInput(attrs={
-                "type": "datetime-local"
+            "forma_pagamento": forms.RadioSelect(),
+            "data_inicio": forms.DateInput(attrs={
+                "type": "date"
             }),
-            "data_fim": forms.DateTimeInput(attrs={
-                "type": "datetime-local"
+            "data_fim": forms.DateInput(attrs={
+                "type": "date"
             }),
         }
     
@@ -196,6 +201,8 @@ class AgendamentoForm(forms.ModelForm):
         if user:
             self.fields["pet"].queryset = Pet.objects.filter(usuario=user)
 
+        self.fields["forma_pagamento"].choices = Agendamento.FormaPagamento.choices
+
 
 class AvaliacaoForm(forms.ModelForm):
     
@@ -203,7 +210,9 @@ class AvaliacaoForm(forms.ModelForm):
         model = Avaliacao
         fields = ["nota", "comentario"]
         widgets = {
-            "nota": forms.RadioSelect(choices=[(i, f"{i} ★") for i in range(1, 6)]),
+            "nota": forms.RadioSelect(choices=[(i, f"{i} ★") for i in range(1, 6)], attrs={
+        "class": "radio-nota"
+        }),
             "comentario": forms.Textarea(attrs={
                 "placeholder": "Compartilhe sua experiência...",
                 "rows": 4

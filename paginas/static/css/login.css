@@ -1,10 +1,36 @@
 *{
- 
-  font-family:"Poppins", sans-serif;
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins', sans-serif;
 }
+
 body{
   background:#f5f7fb; 
 }
+
+.navbar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:18px 60px;
+  background:white;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.logo{
+  font-size:22px;
+  font-weight:600;
+  color:#2b59ff;
+}
+
+a, a:visited {
+  text-decoration: none;
+  color: inherit;
+}
+
+
 .princ{
   min-height:100vh;
   display:flex;
@@ -84,7 +110,7 @@ button{
   cursor:pointer;
 }
 
-a{
+.form a{
   display:block;
   text-align:center;
   margin-top:10px;
