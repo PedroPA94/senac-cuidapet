@@ -1,7 +1,88 @@
+{% load static %}
 
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><title>Novo Agendamento</title></head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novo Agendamento</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
+    <style>
+        .error-messages { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
+    </style>
+</head>
 <body>
-  <h1>Novo Agendamento com {{ cuidador.usuario.first_name }}</h1>
-  <form method="post">{% csrf_token %} {{ form.as_p }} <button type="submit">Confirmar</button> <a href="{% url 'buscar_cuidadores' %}">Cancelar</a></form>
-  <p>Obs.: O valor total será calculado automaticamente (diária × dias).</p>
-</body></html>
+    <header class="navbar">
+        <div class="logo">
+            <span>
+                <i class="fa-solid fa-paw"></i>
+                CuidaPet
+            </span>
+        </div>
+    </header>
+
+    <main class="princ">
+        <section class="card">
+            {% if cuidador %}
+                <h1>Novo Agendamento com {{ cuidador.usuario.first_name }}</h1>
+            {% else %}
+                <h1>Novo Agendamento</h1>
+            {% endif %}
+            
+            <form method="post">
+                {% csrf_token %}
+                
+                {% if form.non_field_errors %}
+                    <div style="color: #d32f2f; margin-bottom: 1rem;">
+                        {% for error in form.non_field_errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+                
+                <div style="margin-bottom: 1rem;">
+                    <label>{{ form.pet.label }}</label>
+                    {{ form.pet }}
+                    {% if form.pet.errors %}
+                        <span class="error-messages">{{ form.pet.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label>{{ form.data_inicio.label }}</label>
+                    {{ form.data_inicio }}
+                    {% if form.data_inicio.errors %}
+                        <span class="error-messages">{{ form.data_inicio.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label>{{ form.data_fim.label }}</label>
+                    {{ form.data_fim }}
+                    {% if form.data_fim.errors %}
+                        <span class="error-messages">{{ form.data_fim.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                
+                <div style="margin-bottom: 1rem;">
+                    <label>{{ form.forma_pagamento.label }}</label>
+                    {{ form.forma_pagamento }}
+                    {% if form.forma_pagamento.errors %}
+                        <span class="error-messages">{{ form.forma_pagamento.errors.0 }}</span>
+                    {% endif %}
+                </div>
+                
+                <p><small>Nota: O valor total será calculado automaticamente (número de dias × valor da diária).</small></p>
+                
+                <button type="submit">Confirmar</button>
+                <a href="{% url 'agendamento_list' %}" class="btna">Cancelar</a>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>@Copyright 2026 - CuidaPet</p>
+    </footer>
+</body>
+</html>

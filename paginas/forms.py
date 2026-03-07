@@ -1,88 +1,207 @@
-# app: cuidadores/forms.py
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
-from .models import Cuidador
-import re
+from .models import Usuario, Cuidador, Pet, Agendamento, Avaliacao, Servico
 
 User = get_user_model()
 
-class UserForm(UserCreationForm):
-    """
-    Form de criação de usuário com email + password1/password2.
-    Se você usa o email como username, pode ajustar o User model ou sobrescrever save().
-    """
+
+class TutorForm(UserCreationForm):
+    first_name = forms.CharField(
+        label="Nome",
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={
+            "placeholder": "João da Silva"
+        })
+    )
+    
     email = forms.EmailField(
         label="E-mail",
         required=True,
         widget=forms.EmailInput(attrs={
-            "placeholder": "seu@email.com",
-            "class": "input-text"
+            "placeholder": "seu@email.com"
+        })
+    )
+    
+    telefone = forms.CharField(
+        label="Celular",
+        max_length=11,
+        required=True,
+        widget=forms.TextInput(attrs={
+            "placeholder": "(00) 00000-0000"
         })
     )
 
-    class Meta(UserCreationForm.Meta):
-        model = User
-        fields = ("email",)  # password1/password2 vêm do UserCreationForm
-        # Se seu User ainda exige username, adicione "username" aqui ou no Model.
+    class Meta:
+        model = Usuario
+        fields = ("first_name", "email", "telefone", "password1", "password2")
+
+    def clean_email(self):
+        """Validar se o email já está registrado"""
+        email = self.cleaned_data.get('email')
+        if email and Usuario.objects.filter(username=email).exists():
+            raise forms.ValidationError(
+                "Este email já está registrado. Use outro email ou faça login."
+            )
+        return email
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        # Se seu User tem username obrigatório e você quer usar o email como username:
-        if hasattr(user, "username") and not user.username:
-            user.username = self.cleaned_data["email"]
+        user.username = self.cleaned_data["email"]
         user.email = self.cleaned_data["email"]
+        user.tipo_usuario = "TUTOR"
+        if commit:
+            user.save()
+        return user
+
+
+class PetFormTutor(forms.ModelForm):
+    
+    class Meta:
+        model = Pet
+        fields = ["nome", "especie", "raca", "data_nascimento"]
+        labels = {
+            "especie": "Espécie",
+            "raca": "Raça",
+            "data_nascimento": "Data de nascimento"
+        }
+        widgets = {
+            "nome": forms.TextInput(attrs={
+                "placeholder": "Ex: Mel, Thor"
+            }),
+            "especie": forms.Select(),
+            "raca": forms.TextInput(attrs={
+                "placeholder": "Ex: Golden, Persa, SRD"
+            }),
+            "data_nascimento": forms.DateInput(attrs={
+                "type": "date"
+            }),
+        }
+    
+    def __init__(self, *args, required=False, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Todos os campos são opcionais
+        for field in self.fields:
+            self.fields[field].required = False
+
+
+class CuidadorRegistroForm(UserCreationForm):
+    first_name = forms.CharField(
+        label="Nome Completo",
+        max_length=150,
+        required=True,
+        widget=forms.TextInput(attrs={
+            "placeholder": "João da Silva"
+        })
+    )
+    
+    email = forms.EmailField(
+        label="E-mail",
+        required=True,
+        widget=forms.EmailInput(attrs={
+            "placeholder": "seu@email.com"
+        })
+    )
+    
+    telefone = forms.CharField(
+        label="Celular",
+        max_length=11,
+        required=True,
+        widget=forms.TextInput(attrs={
+            "placeholder": "(00) 00000-0000"
+        })
+    )
+
+    class Meta:
+        model = Usuario
+        fields = ("first_name", "email", "telefone", "password1", "password2")
+
+    def clean_email(self):
+        """Validar se o email já está registrado"""
+        email = self.cleaned_data.get('email')
+        if email and Usuario.objects.filter(username=email).exists():
+            raise forms.ValidationError(
+                "Este email já está registrado. Use outro email ou faça login."
+            )
+        return email
+
+    def save(self, commit=True):
+        user = super().save(commit=False)
+        user.username = self.cleaned_data["email"]
+        user.email = self.cleaned_data["email"]
+        user.tipo_usuario = "CUIDADOR"
         if commit:
             user.save()
         return user
 
 
 class CuidadorForm(forms.ModelForm):
+   
+    servicos = forms.ModelMultipleChoiceField(
+        queryset=Servico.objects.all(),
+        widget=forms.CheckboxSelectMultiple(attrs={
+        "class": "checkbox-servicos"
+        }),
+        label="Serviços que você oferece",
+        required=False
+    )
+
     class Meta:
         model = Cuidador
-        fields = [
-            "nome_completo",
-            "cpf",
-            "celular",
-            "uf",
-            "cidade",
-            "sobre_mim",
-            "servico_prestado",
-            "dias_disponiveis",
-        ]
+        fields = ["uf", "cidade", "descricao", "valor_diaria", "servicos"]
+        labels = {
+            "uf": "UF",
+            "descricao": "Descrição",
+            "valor_diaria": "Valor diária"
+        }
         widgets = {
-            "nome_completo": forms.TextInput(attrs={"placeholder": "João da Silva", "required": True}),
-            "cpf": forms.TextInput(attrs={"placeholder": "000.000.000-00", "required": True}),
-            "celular": forms.TextInput(attrs={"placeholder": "(00) 00000-0000", "required": True}),
-            "uf": forms.TextInput(attrs={"placeholder": "SP", "maxlength": 2, "required": True}),
-            "cidade": forms.TextInput(attrs={"placeholder": "São Paulo", "required": True}),
-            "sobre_mim": forms.Textarea(attrs={"placeholder": "...", "rows": 4}),
-            "servico_prestado": forms.Select(),
-            "dias_disponiveis": forms.TextInput(attrs={"placeholder": "Ex.: Segunda-feira a Quinta-feira"}),
+            "uf": forms.Select(),
+            "cidade": forms.TextInput(attrs={
+                "placeholder": "São Paulo"
+            }),
+            "descricao": forms.Textarea(attrs={
+                "placeholder": "Conte sobre sua experiência...",
+                "rows": 4
+            }),
+            "valor_diaria": forms.NumberInput(attrs={
+                "placeholder": "100.00",
+                "step": "0.01"
+            }),
         }
-        help_texts = {
-            "dias_disponiveis": "Ex.: Segunda-feira a Quinta-feira",
+
+
+class AgendamentoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Agendamento
+        fields = ["pet", "forma_pagamento", "data_inicio", "data_fim"]
+        widgets = {
+            "pet": forms.Select(),
+            "forma_pagamento": forms.Select(),
+            "data_inicio": forms.DateTimeInput(attrs={
+                "type": "datetime-local"
+            }),
+            "data_fim": forms.DateTimeInput(attrs={
+                "type": "datetime-local"
+            }),
         }
+    
+    def __init__(self, *args, user=None, cuidador=None, **kwargs):
+        super().__init__(*args, **kwargs)
+        if user:
+            self.fields["pet"].queryset = Pet.objects.filter(usuario=user)
 
-    # ----- Validações específicas do Brasil -----
-    def clean_cpf(self):
-        cpf = self.cleaned_data["cpf"].strip()
-        # aceita com ou sem máscara; aqui só exigimos o formato mascarado do layout
-        pattern = r"^\d{3}\.\d{3}\.\d{3}-\d{2}$"
-        if not re.match(pattern, cpf):
-            raise forms.ValidationError("Informe o CPF no formato 000.000.000-00.")
-        return cpf
 
-    def clean_celular(self):
-        celular = self.cleaned_data["celular"].strip()
-        # Aceita (00) 00000-0000 ou (00) 0000-0000
-        pattern = r"^\(\d{2}\)\s?\d{4,5}-\d{4}$"
-        if not re.match(pattern, celular):
-            raise forms.ValidationError("Informe o celular no formato (00) 00000-0000.")
-        return celular
-
-    def clean_uf(self):
-        uf = self.cleaned_data["uf"].strip().upper()
-        if len(uf) != 2:
-            raise forms.ValidationError("UF deve conter 2 letras, ex.: SP.")
-        return uf
+class AvaliacaoForm(forms.ModelForm):
+    
+    class Meta:
+        model = Avaliacao
+        fields = ["nota", "comentario"]
+        widgets = {
+            "nota": forms.RadioSelect(choices=[(i, f"{i} ★") for i in range(1, 6)]),
+            "comentario": forms.Textarea(attrs={
+                "placeholder": "Compartilhe sua experiência...",
+                "rows": 4
+            }),
+        }

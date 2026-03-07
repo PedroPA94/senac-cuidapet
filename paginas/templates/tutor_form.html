@@ -1,6 +1,165 @@
+{% load static %}
 
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><title>Cadastro Tutor</title></head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>PetCare - Cadastro de Tutor</title>
+  <link rel="stylesheet" href="{% static 'css/tutor.css' %}" />
+</head>
+
 <body>
-  <h1>Cadastrar Tutor</h1>
-  <form method="post">{% csrf_token %} {{ form.as_p }} <button type="submit">Cadastrar</button> <a href="{% url 'login' %}">Já tenho conta</a></form>
-</body></html>
+   <header class="navbar">
+    <div class="logo">
+         <span>
+            <i class="fa-solid fa-paw"></i>
+            CuidaPet
+         </span>
+    </div>
+  </header>
+  <main class="page">
+    <section class="wrap">
+
+      <div class="titulo">
+        <h1>Cadastro de Tutor</h1>
+        <p>Crie sua conta e comece a cuidar dos seus pets com os melhores profissionais</p>
+      </div>
+
+      <form class="card" method="post">
+        {% csrf_token %}
+
+        <!-- MENSAGENS DE ERRO GERAL -->
+        {% if tutor_form.non_field_errors %}
+          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+            <strong>Erro no formulário:</strong>
+            <ul style="margin: 5px 0 0 20px;">
+              {% for error in tutor_form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <!-- SEÇÃO: Dados Pessoais -->
+        <section class="section">
+          <div class="section-int">
+            <h2>Dados Pessoais</h2>
+          </div>
+
+          <div>
+            <div class="borda">
+              <p class="texto">{{ tutor_form.first_name.label }}</p>
+              <div class="input">
+                {{ tutor_form.first_name }}
+              </div>
+              {% if tutor_form.first_name.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.first_name.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">Celular</p>
+              <div class="input">
+                {{ tutor_form.telefone }}
+              </div>
+              {% if tutor_form.telefone.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.telefone.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- SEÇÃO: Acesso -->
+        <section class="section">
+          <div class="section-int">
+            <h2>Acesso</h2>
+          </div>
+
+          <div>
+            <div class="field col-2">
+              <p class="texto">{{ tutor_form.email.label }}</p>
+              <div class="input">
+                {{ tutor_form.email }}
+              </div>
+              {% if tutor_form.email.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.email.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="field">
+              <p class="texto">{{ tutor_form.password1.label }}</p>
+              <div class="input">
+                {{ tutor_form.password1 }}
+              </div>
+              {% if tutor_form.password1.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.password1.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ tutor_form.password2.label }}</p>
+              <div class="input">
+                {{ tutor_form.password2 }}
+              </div>
+              {% if tutor_form.password2.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.password2.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <!-- SEÇÃO: Cadastre seus Pets (OPCIONAL) -->
+        <section class="section">
+          <div>
+            <div>
+              <h2>Cadastre seus Pets</h2>
+              <p>Adicione informações sobre os pets que você cuida (opcional)</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="borda">
+              <p class="texto">{{ pet_form.nome.label }}</p>
+              <div class="input">
+                {{ pet_form.nome }}
+              </div>
+              {% if pet_form.nome.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.nome.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ pet_form.especie.label }}</p>
+              <div class="input">
+                {{ pet_form.especie }}
+              </div>
+              {% if pet_form.especie.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.especie.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ pet_form.raca.label }}</p>
+              <div class="input">
+                {{ pet_form.raca }}
+              </div>
+              {% if pet_form.raca.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.raca.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ pet_form.data_nascimento.label }}</p>
+              <div class="input">
+                {{ pet_form.data_nascimento }}
+              </div>
+              {% if pet_form.data_nascimento.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.data_nascimento.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <a href="{% url 'login' %}">Voltar</a>
+          <button type="submit">Finalizar</button>
+        </div>
+
+      </form>
+    </section>
+    
+  </main>
+  <footer>
+    <p>@Copyright 2026 - CuidaPet</p>
+  </footer>
+ 
+</body>
+</html>

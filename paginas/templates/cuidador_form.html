@@ -1,11 +1,196 @@
+{% load static %}
 
-<!DOCTYPE html><html lang="pt-br"><head><meta charset="utf-8"><title>Cadastro Cuidador</title></head>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <title>PetCare - Cadastro de Cuidador</title>
+  <link rel="stylesheet" href="{% static 'css/cuidador.css' %}" />
+</head>
+
 <body>
-  <h1>Cadastrar Cuidador</h1>
-  <form method="post">{% csrf_token %}
-    <h2>Dados de acesso</h2> {{ user_form.as_p }}
-    <h2>Perfil de cuidador</h2> {{ cuidador_form.as_p }}
-    <button type="submit">Cadastrar</button>
-    <a href="{% url 'login' %}">Já tenho conta</a>
-  </form>
-</body></html>
+
+ <header class="navbar">
+    <div class="logo">
+         <span>
+            <i class="fa-solid fa-paw"></i>
+            CuidaPet
+         </span>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="wrap">
+
+      <div class="titulo">
+        <h1>Cadastro de Cuidador</h1>
+        <p>Crie sua conta e comece a cuidar dos pets de seus clientes</p>
+      </div>
+
+      <form class="card" method="post">
+        {% csrf_token %}
+
+        {% if usuario_form.non_field_errors %}
+          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+            <strong>Erro ao criar usuário:</strong>
+            <ul style="margin: 5px 0 0 20px;">
+              {% for error in usuario_form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        {% if cuidador_form.non_field_errors %}
+          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+            <strong>Erro ao preencher dados do cuidador:</strong>
+            <ul style="margin: 5px 0 0 20px;">
+              {% for error in cuidador_form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
+        <section class="section">
+          <div class="section-int">
+            <h2>Dados Pessoais</h2>
+          </div>
+
+          <div>
+            <div class="borda">
+              <p class="texto">{{ usuario_form.first_name.label }}</p>
+              <div class="input">
+                {{ usuario_form.first_name }}
+              </div>
+              {% if usuario_form.first_name.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.first_name.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">Celular</p>
+              <div class="input">
+                {{ usuario_form.telefone }}
+              </div>
+              {% if usuario_form.telefone.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.telefone.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <hr>
+        <section class="section">
+          <div class="section-int">
+            <h2>Acesso</h2>
+          </div>
+
+          <div>
+            <div class="field col-2">
+              <p class="texto">{{ usuario_form.email.label }}</p>
+              <div class="input">
+                {{ usuario_form.email }}
+              </div>
+              {% if usuario_form.email.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.email.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="field">
+              <p class="texto">{{ usuario_form.password1.label }}</p>
+              <div class="input">
+                {{ usuario_form.password1 }}
+              </div>
+              {% if usuario_form.password1.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.password1.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ usuario_form.password2.label }}</p>
+              <div class="input">
+                {{ usuario_form.password2 }}
+              </div>
+              {% if usuario_form.password2.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.password2.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <hr>
+        <section class="section">
+          <div class="section-int">
+            <h2>Localização</h2>
+          </div>
+
+          <div>
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.uf.label }}</p>
+              <div class="input">
+                {{ cuidador_form.uf }}
+              </div>
+              {% if cuidador_form.uf.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.uf.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.cidade.label }}</p>
+              <div class="input">
+                {{ cuidador_form.cidade }}
+              </div>
+              {% if cuidador_form.cidade.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.cidade.errors.0 }}</p>{% endif %}
+            </div>
+          </div>
+        </section>
+
+        <hr>
+
+        <section class="section">
+          <div>
+            <div>
+              <h2>Cuidador</h2>
+              <p>Diga a seus clientes quem você é, conte sua história, por que eles deixariam seus pets com você!</p>
+            </div>
+          </div>
+
+          <div>
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.descricao.label }}</p>
+              <div class="input">
+                {{ cuidador_form.descricao }}
+              </div>
+              {% if cuidador_form.descricao.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.descricao.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.valor_diaria.label }}</p>
+              <div class="input">
+                {{ cuidador_form.valor_diaria }}
+              </div>
+              {% if cuidador_form.valor_diaria.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.valor_diaria.errors.0 }}</p>{% endif %}
+            </div>
+
+            <div class="borda">
+              <p class="texto">{{ cuidador_form.servicos.label }}</p>
+
+              <div class="input">
+                {{ cuidador_form.servicos }}
+              </div>
+
+              {% if cuidador_form.servicos.errors %}
+                <p style="color: red; font-size: 0.85rem;">
+                  {{ cuidador_form.servicos.errors.0 }}
+                </p>
+              {% endif %}
+            </div>
+          </div>
+        </section>
+
+        <div class="actions">
+          <a href="{% url 'login' %}">Voltar</a>
+          <button type="submit">Finalizar</button>
+        </div>
+
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <p>@Copyright 2026 - CuidaPet</p>
+  </footer>
+
+</body>
+</html>

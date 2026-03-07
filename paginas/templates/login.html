@@ -33,20 +33,31 @@
       <p class="subt">Entre em sua conta para continuar</p>
 
     
-      <form class="form" action="#" method="post">
+      <form class="form" method="post">
+        {% csrf_token %}
+
+        {% if form.non_field_errors %}
+          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+            <strong>Erro no login:</strong>
+            <ul style="margin: 5px 0 0 20px;">
+              {% for error in form.non_field_errors %}
+                <li>{{ error }}</li>
+              {% endfor %}
+            </ul>
+          </div>
+        {% endif %}
+
         <div class="campo">
           <p class="texto">E-mail</p>
           <div class="input-classe">
-         
-            <input type="email" placeholder="seu@email.com" required />
+            <input type="email" name="username" placeholder="seu@email.com" required />
           </div>
         </div>
 
         <div class="campo">
           <p class="texto">Senha</p>
           <div class="input-classe">
-         
-            <input type="password" placeholder="********" required />
+            <input type="password" name="password" placeholder="********" required />
           </div>
         </div>
 
