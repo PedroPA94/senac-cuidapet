@@ -20,6 +20,32 @@ A prova de conceito tem como objetivo validar o fluxo principal do sistema, perm
 
 <br>
 
+# Estrutura do Projeto
+
+```
+senac-cuidapet/
+├── paginas/                          # App principal do Django
+│   ├── models.py                     # Modelos de dados
+│   ├── views.py                      # Views
+│   ├── forms.py                      # Formulários
+│   ├── urls.py                       # Rotas da aplicação
+│   ├── static/
+│   │   └── css/                      # Estilos CSS
+│   └── templates/                    # Templates HTML
+│       ├── login.html                # Página de login
+│       ├── home.html                 # Home - lista de cuidadores com filtros
+│       ├── tutor_form.html           # Cadastro de tutor + pet
+│       ├── cuidador_form.html        # Cadastro de cuidador + serviços
+│       ├── agendamento_form.html     # Formulário de agendamento
+│       ├── agendamento_list.html     # Lista de agendamentos do usuário
+│       └── avaliacao_form.html       # Formulário de avaliação
+├── setup/                            # Configurações do Django
+├── manage.py                         # CLI do Django
+├── requirements.txt                  # Dependências do projeto
+```
+
+<br>
+
 # Configuração do Ambiente
 
 > Recomenda-se a utilização do **pyenv** para gerenciamento de versões do Python.  
@@ -75,3 +101,5 @@ python manage.py runserver
 O sistema estará disponível em:
 
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+<br>
