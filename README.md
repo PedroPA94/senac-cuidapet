@@ -22,12 +22,10 @@ A prova de conceito tem como objetivo validar o fluxo principal do sistema, perm
 
 # Vídeo demonstrativo
 
-<video width="640" height="480" controls>
-  <source src="video_demonstrativo.mp4" type="video/mp4">
-  Seu navegador não suporta vídeo HTML5.
-</video>
 
-<br>
+https://github.com/user-attachments/assets/8701eb9b-de78-4b44-942c-f138ababf2f5
+
+
 <br>
 
 # Estrutura do Projeto
