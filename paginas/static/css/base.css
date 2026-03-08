@@ -47,3 +47,50 @@ footer{
   font-size:0.9rem;
   padding: 2rem;
 }
+
+
+/* Toast para mensagens das páginas */
+
+#toast-container {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  z-index: 9999; 
+}
+
+.toast {
+  min-width: 250px;
+  padding: 1rem 1.5rem;
+  border-radius: 8px;
+  color: #fff;
+  font-weight: 500;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateX(100%);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.toast.success {
+  background-color: #28a745;
+}
+
+.toast.error {
+  background-color: #dc3545; 
+}
+
+.toast.info {
+  background-color: #17a2b8;
+}
+
+.toast.warning {
+  background-color: #ffc107; 
+  color: #212529;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateX(0);
+}
