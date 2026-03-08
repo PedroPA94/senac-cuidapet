@@ -18,7 +18,7 @@ def criar_dados(apps, schema_editor):
     visita = Servico.objects.create(descricao="Visita")
     daycare = Servico.objects.create(descricao="Day Care")
 
-    # Criar usuário cuidador
+    # Criar cuidadores
     user_cuidador = Usuario.objects.create(
         username="joao",
         first_name="João",
@@ -37,11 +37,76 @@ def criar_dados(apps, schema_editor):
 
     cuidador.servicos.add(hospedagem, passeio, visita, daycare)
 
-    # Disponibilidade
     Disponibilidade.objects.create(
         cuidador=cuidador,
         data_inicio=datetime(2026, 3, 1, 8, 0),
         data_fim=datetime(2026, 3, 30, 18, 0),
+    )
+
+    user_cuidador2 = Usuario.objects.create(
+        username="maria",
+        first_name="Maria",
+        email="maria@email.com",
+        password=make_password("123456"),
+        tipo_usuario="CUIDADOR",
+    )
+
+    cuidador2 = Cuidador.objects.create(
+        usuario=user_cuidador2,
+        descricao="Amo cuidar de pets e brincar com eles.",
+        valor_diaria=Decimal("90.00"),
+        cidade="Rio de Janeiro",
+        uf="RJ",
+    )
+    cuidador2.servicos.add(hospedagem, passeio, visita)
+    Disponibilidade.objects.create(
+        cuidador=cuidador2,
+        data_inicio=datetime(2026, 3, 5, 9, 0),
+        data_fim=datetime(2026, 3, 25, 19, 0),
+    )
+
+    user_cuidador3 = Usuario.objects.create(
+        username="carlos",
+        first_name="Carlos",
+        email="carlos@email.com",
+        password=make_password("123456"),
+        tipo_usuario="CUIDADOR",
+    )
+
+    cuidador3 = Cuidador.objects.create(
+        usuario=user_cuidador3,
+        descricao="Experiência com cães e gatos de todas as idades.",
+        valor_diaria=Decimal("75.00"),
+        cidade="Belo Horizonte",
+        uf="MG",
+    )
+    cuidador3.servicos.add(hospedagem, daycare)
+    Disponibilidade.objects.create(
+        cuidador=cuidador3,
+        data_inicio=datetime(2026, 3, 2, 7, 0),
+        data_fim=datetime(2026, 3, 28, 20, 0),
+    )
+
+    user_cuidador4 = Usuario.objects.create(
+        username="ana",
+        first_name="Ana",
+        email="ana@email.com",
+        password=make_password("123456"),
+        tipo_usuario="CUIDADOR",
+    )
+
+    cuidador4 = Cuidador.objects.create(
+        usuario=user_cuidador4,
+        descricao="Cuidando com paciência e atenção aos detalhes.",
+        valor_diaria=Decimal("85.00"),
+        cidade="Curitiba",
+        uf="PR",
+    )
+    cuidador4.servicos.add(passeio, visita)
+    Disponibilidade.objects.create(
+        cuidador=cuidador4,
+        data_inicio=datetime(2026, 3, 3, 8, 30),
+        data_fim=datetime(2026, 3, 29, 18, 30),
     )
 
     # Criar tutor

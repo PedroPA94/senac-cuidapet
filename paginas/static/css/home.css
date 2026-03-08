@@ -74,6 +74,9 @@
   width:300px;
   box-shadow:0 4px 18px rgba(0,0,0,0.08);
   position:relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .card img{
