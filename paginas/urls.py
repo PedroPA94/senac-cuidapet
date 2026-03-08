@@ -3,7 +3,7 @@ from . import views
 
 urlpatterns = [
     # Páginas gerais
-    path("", views.index, name="index"),
+    path("", views.login_view, name="login"),
     path('login/', views.login_view, name='login'),
     path('cadastro/', views.cadastro, name='cadastro'),
     path('home/', views.home, name='home'),
@@ -11,7 +11,7 @@ urlpatterns = [
     # Cadastro Tutor
     path('tutor/register/', views.TutorCreateView.as_view(), name='tutor_create'),
 
-    # Cadastro e Perfil Cuidador
+    # Cadastro Cuidador
     path('cuidador/register/', views.CuidadorCreateView.as_view(), name='cuidador_create'),
         
     # Agendamentos

@@ -1,27 +1,13 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>PetCare - Cadastro</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="{% static 'css/cadastro.css' %}" />
-</head>
-<body>
-<header class="navbar">
-    <div class="logo">
-        <a href="{% url 'home' %}">
-            <span>
-                <i class="fa-solid fa-paw"></i>
-                CuidaPet
-            </span>
-        </a>
-    </div>
-</header>
+{% block title %}CuidaPet - Cadastro{% endblock %}
 
-<main class="princ">
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cadastro.css' %}">
+{% endblock %}
+
+{% block content %}
     <section class="card" aria-label="Login CuidaPet">
         <h1>Bem-vindo ao CuidaPet</h1>
         <p class="subt">Selecione qual tipo de usuário você será!</p>
@@ -32,10 +18,4 @@
         <hr>
         <a href="{% url 'login' %}">Fazer Login</a>
     </section>
-</main>
-
-<footer>
-    <p>@Copyright 2026 - CuidaPet</p>
-</footer>
-</body>
-</html>
+{% endblock %}

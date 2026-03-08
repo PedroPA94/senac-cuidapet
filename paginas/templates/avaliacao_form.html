@@ -1,76 +1,55 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Avaliar Serviço</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-    <link rel="stylesheet" href="{% static 'css/avaliacao.css' %}" />
-    <style>
-        .error-messages { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
-    </style>
-</head>
-<body>
-    <header class="navbar">
-        <div class="logo">
-          <a href="{% url 'home' %}">
-              <span>
-                  <i class="fa-solid fa-paw"></i>
-                  CuidaPet
-              </span>
-          </a>
-        </div>
-    </header>
+{% block title %}CuidaPet - Avaliação{% endblock %}
 
-    <main class="princ">
-        <section class="card">
-            {% if agendamento %}
-                <h1>Avaliar serviço de {{ agendamento.cuidador.usuario.first_name }}</h1>
-                <p><strong>Pet:</strong> {{ agendamento.pet.nome }}</p>
-                <p><strong>Período:</strong> {{ agendamento.data_inicio|date:"d/m/Y H:i" }} até {{ agendamento.data_fim|date:"d/m/Y H:i" }}</p>
-            {% else %}
-                <h1>Avaliar Serviço</h1>
-            {% endif %}
-            
-            <form method="post">
-                {% csrf_token %}
-                
-                {% if form.non_field_errors %}
-                    <div style="color: #d32f2f; margin-bottom: 1rem;">
-                        {% for error in form.non_field_errors %}
-                            <p>{{ error }}</p>
-                        {% endfor %}
-                    </div>
-                {% endif %}
-                
-                <div class="nota">
-                    <label><strong>{{ form.nota.label }}</strong></label>
-                    {{ form.nota }}
-                    {% if form.nota.errors %}
-                        <span class="error-messages">{{ form.nota.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <div>
-                    <label><strong>{{ form.comentario.label }}</strong></label>
-                    {{ form.comentario }}
-                    {% if form.comentario.errors %}
-                        <span class="error-messages">{{ form.comentario.errors.0 }}</span>
-                    {% endif %}
-                </div>
-                
-                <button type="submit">Enviar avaliação</button>
-                {% if agendamento %}
-                    <a href="{% url 'agendamento_list' %}" class="btna">Cancelar</a>
-                {% endif %}
-            </form>
-        </section>
-    </main>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/avaliacao.css' %}">
+{% endblock %}
 
-    <footer>
-        <p>@Copyright 2026 - CuidaPet</p>
-    </footer>
-</body>
-</html>
+{% block content %}
+
+  <section class="card">
+      {% if agendamento %}
+          <h1>Avaliar serviço de {{ agendamento.cuidador.usuario.first_name }}</h1>
+          <p><strong>Pet:</strong> {{ agendamento.pet.nome }}</p>
+          <p><strong>Período:</strong> {{ agendamento.data_inicio|date:"d/m/Y H:i" }} até {{ agendamento.data_fim|date:"d/m/Y H:i" }}</p>
+      {% else %}
+          <h1>Avaliar Serviço</h1>
+      {% endif %}
+      
+      <form method="post">
+          {% csrf_token %}
+          
+          {% if form.non_field_errors %}
+              <div style="color: #d32f2f; margin-bottom: 1rem;">
+                  {% for error in form.non_field_errors %}
+                      <p>{{ error }}</p>
+                  {% endfor %}
+              </div>
+          {% endif %}
+          
+          <div class="nota">
+              <label><strong>{{ form.nota.label }}</strong></label>
+              {{ form.nota }}
+              {% if form.nota.errors %}
+                  <span class="error-messages">{{ form.nota.errors.0 }}</span>
+              {% endif %}
+          </div>
+          
+          <div>
+              <label><strong>{{ form.comentario.label }}</strong></label>
+              {{ form.comentario }}
+              {% if form.comentario.errors %}
+                  <span class="error-messages">{{ form.comentario.errors.0 }}</span>
+              {% endif %}
+          </div>
+          
+          <button type="submit">Enviar avaliação</button>
+          {% if agendamento %}
+              <a href="{% url 'agendamento_list' %}" class="btna">Cancelar</a>
+          {% endif %}
+      </form>
+  </section>
+
+{% endblock %}

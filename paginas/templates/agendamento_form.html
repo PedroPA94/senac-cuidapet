@@ -1,34 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% block title %}CuidaPet - Agendamento{% endblock %}
 
-  <title>CuidaPet - Novo Agendamento</title>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/agendamento.css' %}">
+{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/agendamento.css' %}" />
-  <style>
-    .form-errors { color: #d32f2f; font-size: 0.85rem; margin-top: 0.25rem; display: block; }
-  </style>
-  
-</head>
-
-<body>
-  <header class="navbar">
-    <div>
-      <a href="{% url 'home' %}">
-          <span>
-              <i class="fa-solid fa-paw"></i>
-              CuidaPet
-          </span>
-      </a>
-    </div>
-  </header>
-
-  <main class="page">
+{% block content %}
+  <div class="page">
     <div class="container">
 
       {% if cuidador %}
@@ -201,13 +181,8 @@
       {% else %}
         <p style="text-align:center; padding:40px; color:#666;">Cuidador não encontrado.</p>
       {% endif %}
-
-      <footer>
-        <p>@Copyright 2026 - CuidaPet</p>
-      </footer>
-    
     </div>
-  </main>
+  </div>
 
   <script>
     // Cálculo automático de dias e valor total
@@ -237,5 +212,4 @@
     dataFim.addEventListener('change', calcularTotal);
   </script>
 
-</body>
-</html>
+  {% endblock %}

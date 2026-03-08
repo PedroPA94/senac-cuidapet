@@ -1,31 +1,15 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+{% block title %}CuidaPet - Cadastro{% endblock %}
 
-  <title>CuidaPet - Meus Agendamentos</title>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/agendamento_list.css' %}">
+{% endblock %}
 
-  <link rel="stylesheet" href="{% static 'css/agendamento_list.css' %}" />
-  
-</head>
+{% block content %}
 
-<body>
-  <header class="navbar">
-    <div>
-      <a href="{% url 'home' %}">
-          <span>
-              <i class="fa-solid fa-paw"></i>
-              CuidaPet
-          </span>
-      </a>
-    </div>
-  </header>
-
-  <main class="page">
+  <div class="page">
     <div class="container">
 
       <h1>Meus Agendamentos</h1>
@@ -90,13 +74,8 @@
           </a>
         </div>
       {% endif %}
-
-      <footer>
-        <p>@Copyright 2026 - CuidaPet</p>
-      </footer>
-    
+      
     </div>
-  </main>
+  </div>
 
-</body>
-</html>
+{% endblock %}

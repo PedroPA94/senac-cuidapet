@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, UpdateView, FormView, View, ListView
+from django.views.generic import CreateView, FormView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth import authenticate, login
 from django.urls import reverse_lazy
@@ -16,10 +16,6 @@ from .forms import (
     AgendamentoForm, 
     AvaliacaoForm
 )
-
-
-def index(request):
-    return render(request, 'login.html')
 
 
 def login_view(request):
@@ -44,21 +40,16 @@ def cadastro(request):
 
 
 def home(request):
-    """Página inicial com lista de cuidadores e filtros"""
-    # Obter parâmetros de filtro
     uf_filtro = request.GET.get('uf', '')
     cidade_filtro = request.GET.get('cidade', '')
-    
-    # Query base - todos os cuidadores
+
     cuidadores = Cuidador.objects.all()
     
-    # Aplicar filtros
     if uf_filtro:
         cuidadores = cuidadores.filter(uf=uf_filtro)
     if cidade_filtro:
         cuidadores = cuidadores.filter(cidade__icontains=cidade_filtro)
     
-    # Ordenar por nome do usuário
     cuidadores = cuidadores.select_related('usuario').order_by('usuario__first_name')
     
     context = {
@@ -72,7 +63,6 @@ def home(request):
 
 
 class TutorCreateView(View):
-    """Cadastro de novo Tutor com criação de Pet"""
     template_name = 'tutor_form.html'
     
     def get(self, request):
@@ -94,7 +84,6 @@ class TutorCreateView(View):
                 'pet_form': pet_form
             })
         
-        # Pet é opcional - só valida se houver dados
         if request.POST.get('nome') and not pet_form.is_valid():
             return render(request, self.template_name, {
                 'tutor_form': tutor_form,
@@ -102,10 +91,8 @@ class TutorCreateView(View):
             })
         
         try:
-            # Salvar usuário tutor
             user = tutor_form.save()
             
-            # Salvar pet se preenchido
             if request.POST.get('nome'):
                 pet = pet_form.save(commit=False)
                 pet.usuario = user
@@ -124,7 +111,6 @@ class TutorCreateView(View):
 
 
 class CuidadorCreateView(View):
-    """Cadastro do usuário Cuidador com UF, cidade, etc"""
     template_name = 'cuidador_form.html'
     
     def get(self, request):
@@ -144,19 +130,16 @@ class CuidadorCreateView(View):
         
         if usuario_valid and cuidador_valid:
             try:
-                # Salvar usuário
                 user = usuario_form.save()
                 
-                # Salvar dados do cuidador
                 cuidador = cuidador_form.save(commit=False)
                 cuidador.usuario = user
                 cuidador.save()
-                cuidador_form.save_m2m()  # Salvar servicos (ManyToMany)
+                cuidador_form.save_m2m()
                 
                 messages.success(request, "Cuidador cadastrado com sucesso! Faça login para continuar.")
                 return redirect('login')
             except IntegrityError as e:
-                # Email duplicado ou outro erro de constraint
                 usuario_form.add_error('email', "Erro ao salvar. Este email pode já estar registrado.")
                 return render(request, self.template_name, {
                     'usuario_form': usuario_form,
@@ -165,7 +148,6 @@ class CuidadorCreateView(View):
             except Exception as e:
                 messages.error(request, f"Erro ao salvar: {str(e)}")
         
-        # Se houver erros, exibir novamente
         return render(request, self.template_name, {
             'usuario_form': usuario_form,
             'cuidador_form': cuidador_form
@@ -173,7 +155,6 @@ class CuidadorCreateView(View):
 
 
 class AgendamentoCreateView(LoginRequiredMixin, FormView):
-    """Criar novo agendamento"""
     form_class = AgendamentoForm
     template_name = 'agendamento_form.html'
     success_url = reverse_lazy('agendamento_list')
@@ -184,7 +165,6 @@ class AgendamentoCreateView(LoginRequiredMixin, FormView):
         return kwargs
 
     def form_valid(self, form):
-        # Obter dados do formulário
         pet = form.cleaned_data['pet']
         cuidador_id = self.kwargs.get('cuidador_id')
         cuidador = get_object_or_404(Cuidador, id=cuidador_id)
@@ -199,7 +179,6 @@ class AgendamentoCreateView(LoginRequiredMixin, FormView):
             dias = 1
         valor_total = Decimal(dias) * cuidador.valor_diaria
 
-        # Criar agendamento
         agendamento = Agendamento.objects.create(
             usuario=self.request.user,
             cuidador=cuidador,
@@ -221,7 +200,6 @@ class AgendamentoCreateView(LoginRequiredMixin, FormView):
 
 
 class AgendamentoListView(LoginRequiredMixin, ListView):
-    """Listar agendamentos do usuário logado"""
     model = Agendamento
     template_name = 'agendamento_list.html'
     context_object_name = 'agendamentos'
@@ -231,7 +209,6 @@ class AgendamentoListView(LoginRequiredMixin, ListView):
 
 
 class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
-    """Avaliar um agendamento"""
     form_class = AvaliacaoForm
     template_name = 'avaliacao_form.html'
     success_url = reverse_lazy('agendamento_list')
@@ -246,7 +223,6 @@ class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
         agendamento_id = self.kwargs.get('agendamento_id')
         agendamento = get_object_or_404(Agendamento, id=agendamento_id)
         
-        # Verifica se o usuário é o tutor do agendamento
         if agendamento.usuario != self.request.user:
             messages.error(self.request, "Você não tem permissão para avaliar este agendamento.")
             return redirect('agendamento_list')

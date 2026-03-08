@@ -1,0 +1,57 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    <title>{% block title %}CuidaPet{% endblock %}</title>    
+    {% block css %}{% endblock %}
+
+  </head>
+
+  <body>
+    <header class="navbar">
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <span>
+                    <i class="fa-solid fa-paw"></i>
+                    CuidaPet
+                </span>
+            </a>
+        </div>
+        {% if request.resolver_match.url_name == "home" %}
+            <a style="margin-right: 2rem; text-decoration: none; color: #2b59ff" 
+            href="{% url 'agendamento_list' %}" 
+            class="btn btn-voltar">
+                Meus agendamentos
+            </a>
+        {% endif %}
+    </header>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="message {{ message.tags }}">
+            {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+    
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer >
+        <p>@Copyright 2026 - CuidaPet</p>
+    </footer>
+    
+  </body>
+</html>

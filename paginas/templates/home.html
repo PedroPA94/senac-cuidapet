@@ -1,93 +1,66 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="pt-br">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-        <title>CuidaPet</title>
+{% block title %}CuidaPet{% endblock %}
 
-    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-        
-    </head>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
-    <body>
-    <header class="navbar">
-        <div class="logo">
-            <a href="{% url 'home' %}">
-                <span>
-                    <i class="fa-solid fa-paw"></i>
-                    CuidaPet
-                </span>
-            </a>
-        </div>
-        <a style="margin-right: 2rem; text-decoration: none; color: #2b59ff" href="{% url 'agendamento_list' %}" class="btn btn-voltar">Meus agendamentos</a>
-    </header>
+{% block content %}
 
+<section class="principal container">
+    <div>
+        <h1>Encontre o Cuidador Perfeito para seu Pet</h1>
+        <p>Milhares de cuidadores verificados prontos para dar todo carinho e atenção que seu amigo merece</p>
 
-    <section class="principal container">
-        <div>
-            <h1>Encontre o Cuidador Perfeito para seu Pet</h1>
-            <p>Milhares de cuidadores verificados prontos para dar todo carinho e atenção que seu amigo merece</p>
+        <form class="search-box" method="get">
+            <select name="uf" style="flex:1; border:none; background:#f1f3f7; padding:12px; border-radius:10px; cursor:pointer;">
+                <option value="">-- Selecione Estado --</option>
+                {% for sigla, nome in ufs %}
+                    <option value="{{ sigla }}" {% if uf_filtro == sigla %}selected{% endif %}>{{ sigla }} - {{ nome }}</option>
+                {% endfor %}
+            </select>
 
-            <form class="search-box" method="get">
-                <select name="uf" style="flex:1; border:none; background:#f1f3f7; padding:12px; border-radius:10px; cursor:pointer;">
-                    <option value="">-- Selecione Estado --</option>
-                    {% for sigla, nome in ufs %}
-                        <option value="{{ sigla }}" {% if uf_filtro == sigla %}selected{% endif %}>{{ sigla }} - {{ nome }}</option>
-                    {% endfor %}
-                </select>
+            <input type="text" name="cidade" placeholder="Cidade (opcional)" value="{{ cidade_filtro }}" style="flex:1;">
 
-                <input type="text" name="cidade" placeholder="Cidade (opcional)" value="{{ cidade_filtro }}" style="flex:1;">
+            <button type="submit" class="btn-search">Buscar</button>
+            
+            {% if uf_filtro or cidade_filtro %}
+                <a href="{% url 'home' %}" style="background:#27ae60; color:white; border:none; padding:12px 20px; border-radius:10px; cursor:pointer; text-decoration:none; display:flex; align-items:center;">Limpar</a>
+            {% endif %}
+        </form>
+    </div>
+</section>
 
-                <button type="submit" class="btn-search">Buscar</button>
-                
-                {% if uf_filtro or cidade_filtro %}
-                    <a href="{% url 'home' %}" style="background:#27ae60; color:white; border:none; padding:12px 20px; border-radius:10px; cursor:pointer; text-decoration:none; display:flex; align-items:center;">Limpar</a>
+<section class="cards">
+    {% if cuidadores %}
+        {% for cuidador in cuidadores %}
+            <div class="card">
+                {% if cuidador.foto and cuidador.foto.url %}
+                    <img src="{{ cuidador.foto.url }}" alt="{{ cuidador.usuario.first_name }}">
+                {% else %}
+                    <img src="https://www.petz.com.br/blog/wp-content/uploads/2023/06/dia-do-pet-sitter5.webp" alt="{{ cuidador.usuario.first_name }}">
                 {% endif %}
-            </form>
-        </div>
-    </section>
+                <h3>{{ cuidador.usuario.first_name }}</h3>
+                <p style="color:#666; font-size:0.9rem;">{{ cuidador.cidade }}/{{ cuidador.uf }}</p>
+                <p>{{ cuidador.descricao }}</p>
+                <p style="color:#27ae60; font-weight:bold; margin-top:10px;">R$ {{ cuidador.valor_diaria }}/dia</p>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'agendamento_create' cuidador.id %}" class="btn-agendar">
+                        Agendar
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" style="display:inline-block; margin-top:12px; padding:8px 16px; background:#95a5a6; color:white; text-decoration:none; border-radius:8px; font-size:0.9rem;">
+                        Faça login
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p style="text-align:center; width:100%; padding:40px; color:#666;">Nenhum cuidador encontrado para os filtros selecionados.</p>
+    {% endif %}
+</section>
 
-
-
-
-    <section class="cards">
-        {% if cuidadores %}
-            {% for cuidador in cuidadores %}
-                <div class="card">
-                    {% if cuidador.foto and cuidador.foto.url %}
-                        <img src="{{ cuidador.foto.url }}" alt="{{ cuidador.usuario.first_name }}">
-                    {% else %}
-                        <img src="https://www.petz.com.br/blog/wp-content/uploads/2023/06/dia-do-pet-sitter5.webp" alt="{{ cuidador.usuario.first_name }}">
-                    {% endif %}
-                    <h3>{{ cuidador.usuario.first_name }}</h3>
-                    <p style="color:#666; font-size:0.9rem;">{{ cuidador.cidade }}/{{ cuidador.uf }}</p>
-                    <p>{{ cuidador.descricao }}</p>
-                    <p style="color:#27ae60; font-weight:bold; margin-top:10px;">R$ {{ cuidador.valor_diaria }}/dia</p>
-                    
-                    {% if user.is_authenticated %}
-                        <a href="{% url 'agendamento_create' cuidador.id %}" class="btn-agendar">
-                            Agendar
-                        </a>
-                    {% else %}
-                        <a href="{% url 'login' %}" style="display:inline-block; margin-top:12px; padding:8px 16px; background:#95a5a6; color:white; text-decoration:none; border-radius:8px; font-size:0.9rem;">
-                            Faça login
-                        </a>
-                    {% endif %}
-                </div>
-            {% endfor %}
-        {% else %}
-            <p style="text-align:center; width:100%; padding:40px; color:#666;">Nenhum cuidador encontrado para os filtros selecionados.</p>
-        {% endif %}
-    </section>
-    <footer >
-            <p>@Copyright 2026 - CuidaPet</p>
-    </footer>
-    
-
-
-
-    </body>
-</html>
+{% endblock %}
