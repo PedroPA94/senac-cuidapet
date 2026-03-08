@@ -36,11 +36,17 @@
                 </span>
             </a>
         </div>
-        {% if request.resolver_match.url_name == "home" %}
+        {% if request.resolver_match.url_name == "home" and user.is_authenticated %}
             <a style="margin-right: 2rem; text-decoration: none; color: #2b59ff" 
             href="{% url 'agendamento_list' %}" 
             class="btn btn-voltar">
                 Meus agendamentos
+            </a>
+        {% elif not user.is_authenticated %}
+                    <a style="margin-right: 2rem; text-decoration: none; color: #2b59ff" 
+            href="{% url 'login' %}" 
+            class="btn btn-voltar">
+                Login
             </a>
         {% endif %}
     </header>
