@@ -46,6 +46,10 @@ senac-cuidapet/
 
 <br>
 
+# Modelo de dados
+
+<img width="821" height="656" alt="DER_CuidaPet" src="https://github.com/user-attachments/assets/5ff434a7-b3e6-4df5-9281-9d4923e74feb" />
+
 # Configuração do Ambiente
 
 > Recomenda-se a utilização do **pyenv** para gerenciamento de versões do Python.  
