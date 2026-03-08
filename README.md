@@ -4,14 +4,28 @@ O **CuidaPet** é um sistema proposto para conectar tutores de pets a cuidadores
 
 Esta implementação corresponde à Prova de Conceito (POC) do projeto, contemplando exclusivamente a jornada de usuário de um tutor que busca um cuidador.
 
-O presente trabalho é parte da disciplina **“Projeto Integrador: Desenvolvimento de Sistemas Orientado a Dispositivos Móveis e Baseados na Web”**, do curso de **Análise e Desenvolvimento de Sistemas do SENAC**.
-
 A prova de conceito tem como objetivo validar o fluxo principal do sistema, permitindo que tutores:
 
 * Se cadastrar na plataforma
 * Cadastrem seus pets
 * Realizem agendamentos
 * Deixem avaliações
+
+## Sobre o Projeto
+
+O presente trabalho é parte da disciplina **"Projeto Integrador: Desenvolvimento de Sistemas Orientado a Dispositivos Móveis e Baseados na Web"**, do curso de **Análise e Desenvolvimento de Sistemas do SENAC**.
+
+### Integrantes do Grupo
+
+* Cesar Alencar Delfino
+* Guilherme Oliveira Silva
+* Letycia Iwme Mangolin
+* Pedro Papini de Araujo
+* Samuel Siqueira Borges
+
+### Metodologia
+
+Durante o desenvolvimento, foi utilizada **programação em pares** em diversos momentos, promovendo colaboração e troca de conhecimento.
 
 ## Tecnologias Utilizadas
 
