@@ -20,6 +20,12 @@ A prova de conceito tem como objetivo validar o fluxo principal do sistema, perm
 
 <br>
 
+# Vídeo demonstrativo
+
+[video_demonstrativo.webm](https://github.com/user-attachments/assets/d5397291-e979-440c-9fd0-62bb3cd000d2)
+
+<br>
+
 # Estrutura do Projeto
 
 ```
@@ -49,6 +55,8 @@ senac-cuidapet/
 # Modelo de dados
 
 <img width="821" height="656" alt="DER_CuidaPet" src="https://github.com/user-attachments/assets/5ff434a7-b3e6-4df5-9281-9d4923e74feb" />
+
+<br>
 
 # Configuração do Ambiente
 
