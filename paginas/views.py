@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, FormView, View, ListView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db import IntegrityError
@@ -33,6 +33,12 @@ def login_view(request):
             messages.error(request, "Email ou senha inválidos. Tente novamente.")
     
     return render(request, 'login.html')
+
+
+def logout_view(request):
+    if request.method == 'POST':
+        logout(request)
+    return redirect('home')
 
 
 def cadastro(request):
