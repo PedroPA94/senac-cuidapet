@@ -19,6 +19,12 @@
   margin: 1.5rem 0;
 }
 
+.avaliacao-page textarea {
+  width: 100%;
+  max-width: 100%;
+  resize: vertical;
+}
+
 div.radio-nota {
   display: flex;
   gap: 1rem;

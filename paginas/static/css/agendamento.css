@@ -17,13 +17,6 @@
   margin: 0 auto;
 }
 
-.back {
-  display: inline-block;
-  margin: 8px 0 18px;
-  color: var(--color-primary);
-  font-weight: 600;
-}
-
 .profile-card {
   background: var(--color-surface);
   border: 1px solid var(--color-border);
@@ -184,15 +177,6 @@ ul.servico {
 .pagar {
   margin-top: 14px;
 }
-.radio {
-  margin-top: 10px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 13px;
-  color: var(--color-text-secondary);
-}
-
 .check {
   margin-top: 25px;
   display: flex;
