@@ -31,7 +31,7 @@
             <div class="input">
               {{ tutor_form.first_name }}
             </div>
-            {% if tutor_form.first_name.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.first_name.errors.0 }}</p>{% endif %}
+            {% if tutor_form.first_name.errors %}<p class="field-error">{{ tutor_form.first_name.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="borda">
@@ -39,7 +39,7 @@
             <div class="input">
               {{ tutor_form.telefone }}
             </div>
-            {% if tutor_form.telefone.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.telefone.errors.0 }}</p>{% endif %}
+            {% if tutor_form.telefone.errors %}<p class="field-error">{{ tutor_form.telefone.errors.0 }}</p>{% endif %}
           </div>
         </div>
       </section>
@@ -56,7 +56,7 @@
             <div class="input">
               {{ tutor_form.email }}
             </div>
-            {% if tutor_form.email.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.email.errors.0 }}</p>{% endif %}
+            {% if tutor_form.email.errors %}<p class="field-error">{{ tutor_form.email.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="field">
@@ -64,7 +64,7 @@
             <div class="input">
               {{ tutor_form.password1 }}
             </div>
-            {% if tutor_form.password1.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.password1.errors.0 }}</p>{% endif %}
+            {% if tutor_form.password1.errors %}<p class="field-error">{{ tutor_form.password1.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="borda">
@@ -72,7 +72,7 @@
             <div class="input">
               {{ tutor_form.password2 }}
             </div>
-            {% if tutor_form.password2.errors %}<p style="color: red; font-size: 0.85rem;">{{ tutor_form.password2.errors.0 }}</p>{% endif %}
+            {% if tutor_form.password2.errors %}<p class="field-error">{{ tutor_form.password2.errors.0 }}</p>{% endif %}
           </div>
         </div>
       </section>
@@ -93,7 +93,7 @@
             <div class="input">
               {{ pet_form.nome }}
             </div>
-            {% if pet_form.nome.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.nome.errors.0 }}</p>{% endif %}
+            {% if pet_form.nome.errors %}<p class="field-error">{{ pet_form.nome.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="borda">
@@ -101,7 +101,7 @@
             <div class="input">
               {{ pet_form.especie }}
             </div>
-            {% if pet_form.especie.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.especie.errors.0 }}</p>{% endif %}
+            {% if pet_form.especie.errors %}<p class="field-error">{{ pet_form.especie.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="borda">
@@ -109,7 +109,7 @@
             <div class="input">
               {{ pet_form.raca }}
             </div>
-            {% if pet_form.raca.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.raca.errors.0 }}</p>{% endif %}
+            {% if pet_form.raca.errors %}<p class="field-error">{{ pet_form.raca.errors.0 }}</p>{% endif %}
           </div>
 
           <div class="borda">
@@ -117,7 +117,7 @@
             <div class="input">
               {{ pet_form.data_nascimento }}
             </div>
-            {% if pet_form.data_nascimento.errors %}<p style="color: red; font-size: 0.85rem;">{{ pet_form.data_nascimento.errors.0 }}</p>{% endif %}
+            {% if pet_form.data_nascimento.errors %}<p class="field-error">{{ pet_form.data_nascimento.errors.0 }}</p>{% endif %}
           </div>
         </div>
       </section>

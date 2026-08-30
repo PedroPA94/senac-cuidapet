@@ -20,9 +20,9 @@
       {% csrf_token %}
 
       {% if form.non_field_errors %}
-        <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+        <div class="form-alert">
           <strong>Erro no login:</strong>
-          <ul style="margin: 5px 0 0 20px;">
+          <ul class="form-alert-list">
             {% for error in form.non_field_errors %}
               <li>{{ error }}</li>
             {% endfor %}

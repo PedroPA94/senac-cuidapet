@@ -22,7 +22,7 @@
           {% csrf_token %}
           
           {% if form.non_field_errors %}
-              <div style="color: #d32f2f; margin-bottom: 1rem;">
+              <div class="form-error-summary">
                   {% for error in form.non_field_errors %}
                       <p>{{ error }}</p>
                   {% endfor %}

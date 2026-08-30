@@ -20,6 +20,8 @@
   /* Estados */
   --color-success: #28a745;
   --color-danger: #dc3545;
+  --color-danger-soft: #ffeeee;
+  --color-danger-border: #ffcccc;
   --color-info: #17a2b8;
   --color-warning: #f39c12;
   --color-warning-hover: #e67e22;
@@ -98,6 +100,31 @@ main {
 a,
 a:visited {
   text-decoration: none;
+}
+
+.form-alert {
+  padding: 12px;
+  margin-bottom: 20px;
+  color: var(--color-danger);
+  background-color: var(--color-danger-soft);
+  border: 1px solid var(--color-danger-border);
+  border-radius: 4px;
+}
+
+.form-alert-list {
+  margin: 5px 0 0 20px;
+}
+
+.form-error-summary {
+  margin-bottom: 1rem;
+  color: var(--color-danger);
+}
+
+.field-error,
+.form-errors,
+.error-messages {
+  color: var(--color-danger);
+  font-size: 0.85rem;
 }
 
 footer {

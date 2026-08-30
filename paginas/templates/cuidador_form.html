@@ -20,9 +20,9 @@
         {% csrf_token %}
 
         {% if usuario_form.non_field_errors %}
-          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+          <div class="form-alert">
             <strong>Erro ao criar usuário:</strong>
-            <ul style="margin: 5px 0 0 20px;">
+            <ul class="form-alert-list">
               {% for error in usuario_form.non_field_errors %}
                 <li>{{ error }}</li>
               {% endfor %}
@@ -31,9 +31,9 @@
         {% endif %}
 
         {% if cuidador_form.non_field_errors %}
-          <div style="background-color: #fee; border: 1px solid #fcc; border-radius: 4px; padding: 12px; margin-bottom: 20px; color: #c33;">
+          <div class="form-alert">
             <strong>Erro ao preencher dados do cuidador:</strong>
-            <ul style="margin: 5px 0 0 20px;">
+            <ul class="form-alert-list">
               {% for error in cuidador_form.non_field_errors %}
                 <li>{{ error }}</li>
               {% endfor %}
@@ -52,7 +52,7 @@
               <div class="input">
                 {{ usuario_form.first_name }}
               </div>
-              {% if usuario_form.first_name.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.first_name.errors.0 }}</p>{% endif %}
+              {% if usuario_form.first_name.errors %}<p class="field-error">{{ usuario_form.first_name.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="borda">
@@ -60,7 +60,7 @@
               <div class="input">
                 {{ usuario_form.telefone }}
               </div>
-              {% if usuario_form.telefone.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.telefone.errors.0 }}</p>{% endif %}
+              {% if usuario_form.telefone.errors %}<p class="field-error">{{ usuario_form.telefone.errors.0 }}</p>{% endif %}
             </div>
           </div>
         </section>
@@ -77,7 +77,7 @@
               <div class="input">
                 {{ usuario_form.email }}
               </div>
-              {% if usuario_form.email.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.email.errors.0 }}</p>{% endif %}
+              {% if usuario_form.email.errors %}<p class="field-error">{{ usuario_form.email.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="field">
@@ -85,7 +85,7 @@
               <div class="input">
                 {{ usuario_form.password1 }}
               </div>
-              {% if usuario_form.password1.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.password1.errors.0 }}</p>{% endif %}
+              {% if usuario_form.password1.errors %}<p class="field-error">{{ usuario_form.password1.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="borda">
@@ -93,7 +93,7 @@
               <div class="input">
                 {{ usuario_form.password2 }}
               </div>
-              {% if usuario_form.password2.errors %}<p style="color: red; font-size: 0.85rem;">{{ usuario_form.password2.errors.0 }}</p>{% endif %}
+              {% if usuario_form.password2.errors %}<p class="field-error">{{ usuario_form.password2.errors.0 }}</p>{% endif %}
             </div>
           </div>
         </section>
@@ -110,7 +110,7 @@
               <div class="input">
                 {{ cuidador_form.uf }}
               </div>
-              {% if cuidador_form.uf.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.uf.errors.0 }}</p>{% endif %}
+              {% if cuidador_form.uf.errors %}<p class="field-error">{{ cuidador_form.uf.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="borda">
@@ -118,7 +118,7 @@
               <div class="input">
                 {{ cuidador_form.cidade }}
               </div>
-              {% if cuidador_form.cidade.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.cidade.errors.0 }}</p>{% endif %}
+              {% if cuidador_form.cidade.errors %}<p class="field-error">{{ cuidador_form.cidade.errors.0 }}</p>{% endif %}
             </div>
           </div>
         </section>
@@ -139,7 +139,7 @@
               <div class="input">
                 {{ cuidador_form.descricao }}
               </div>
-              {% if cuidador_form.descricao.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.descricao.errors.0 }}</p>{% endif %}
+              {% if cuidador_form.descricao.errors %}<p class="field-error">{{ cuidador_form.descricao.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="borda">
@@ -147,7 +147,7 @@
               <div class="input">
                 {{ cuidador_form.valor_diaria }}
               </div>
-              {% if cuidador_form.valor_diaria.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.valor_diaria.errors.0 }}</p>{% endif %}
+              {% if cuidador_form.valor_diaria.errors %}<p class="field-error">{{ cuidador_form.valor_diaria.errors.0 }}</p>{% endif %}
             </div>
 
             <div class="borda">
@@ -158,7 +158,7 @@
               </div>
 
               {% if cuidador_form.servicos.errors %}
-                <p style="color: red; font-size: 0.85rem;">
+                <p class="field-error">
                   {{ cuidador_form.servicos.errors.0 }}
                 </p>
               {% endif %}
@@ -169,7 +169,7 @@
               <div class="input">
                 {{ cuidador_form.foto }}
               </div>
-              {% if cuidador_form.foto.errors %}<p style="color: red; font-size: 0.85rem;">{{ cuidador_form.foto.errors.0 }}</p>{% endif %}
+              {% if cuidador_form.foto.errors %}<p class="field-error">{{ cuidador_form.foto.errors.0 }}</p>{% endif %}
             </div>
           </div>
         </section>
