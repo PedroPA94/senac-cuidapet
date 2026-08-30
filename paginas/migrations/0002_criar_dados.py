@@ -20,7 +20,7 @@ def criar_dados(apps, schema_editor):
 
     # Criar cuidadores
     user_cuidador = Usuario.objects.create(
-        username="joao",
+        username="joao@email.com",
         first_name="João",
         email="joao@email.com",
         password=make_password("123456"),
@@ -44,7 +44,7 @@ def criar_dados(apps, schema_editor):
     )
 
     user_cuidador2 = Usuario.objects.create(
-        username="maria",
+        username="maria@email.com",
         first_name="Maria",
         email="maria@email.com",
         password=make_password("123456"),
@@ -66,7 +66,7 @@ def criar_dados(apps, schema_editor):
     )
 
     user_cuidador3 = Usuario.objects.create(
-        username="carlos",
+        username="carlos@email.com",
         first_name="Carlos",
         email="carlos@email.com",
         password=make_password("123456"),
@@ -88,7 +88,7 @@ def criar_dados(apps, schema_editor):
     )
 
     user_cuidador4 = Usuario.objects.create(
-        username="ana",
+        username="ana@email.com",
         first_name="Ana",
         email="ana@email.com",
         password=make_password("123456"),
@@ -111,7 +111,7 @@ def criar_dados(apps, schema_editor):
 
     # Criar tutor
     tutor = Usuario.objects.create(
-        username="augusto",
+        username="augusto@email.com",
         first_name="Augusto",
         email="augusto@email.com",
         password=make_password("123456"),
