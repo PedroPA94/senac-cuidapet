@@ -8,7 +8,7 @@
 {% endblock %}
 
 {% block content %}
-  <div class="page">
+  <div class="page agendamento-page">
     <div class="container">
 
       {% if cuidador %}
@@ -35,7 +35,7 @@
           <div class="divside">
             <p class="diaria-statico">Diária</p>
             <div class="price">
-             <p class="simb">R$ &nbsp;</p> <p class="valor">{{ cuidador.valor_diaria }}</p>
+             <p>R$ {{ cuidador.valor_diaria }}</p>
             </div>
           </div>
         </div>

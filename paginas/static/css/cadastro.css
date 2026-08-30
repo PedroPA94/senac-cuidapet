@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-h1 {
+.cadastro-page h1 {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -54,7 +54,7 @@ h1 {
   padding: 10px 10px;
 }
 
-input {
+.cadastro-page input {
   width: 100%;
   border: none;
   outline: none;
@@ -73,7 +73,7 @@ input {
   text-decoration: none;
 }
 
-button {
+.cadastro-page button {
   width: 100%;
   margin-top: 10px;
   background: var(--color-primary);
@@ -85,13 +85,13 @@ button {
   cursor: pointer;
 }
 
-.btna {
+.card .btna {
   display: inline-block;
   width: 100%;
   text-align: center;
 
   background-color: var(--color-primary);
-  color: var(--color-text-on-primary) !important;
+  color: var(--color-text-on-primary);
 
   padding: 12px;
   padding-right: 0px;
@@ -106,11 +106,11 @@ button {
   transition: background-color 0.2s ease;
 }
 
-.btna:hover {
+.card .btna:hover {
   background-color: var(--color-primary-hover);
 }
 
-hr {
+.cadastro-page hr {
   margin: 15px 0;
 }
 

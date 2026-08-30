@@ -14,7 +14,7 @@
   text-align: center;
 }
 
-h1 {
+.login-page h1 {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -54,7 +54,7 @@ h1 {
   padding: 10px 10px;
 }
 
-input {
+.login-page input {
   width: 100%;
   border: none;
   outline: none;
@@ -63,7 +63,7 @@ input {
   color: var(--color-text);
 }
 
-button {
+.login-page button {
   width: 100%;
   margin-top: 10px;
   background: var(--color-primary);

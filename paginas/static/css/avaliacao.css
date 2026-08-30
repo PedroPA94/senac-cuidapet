@@ -8,7 +8,7 @@
   gap: 0.5rem;
 }
 
-h1 {
+.avaliacao-page h1 {
   font-size: 18px;
   font-weight: 700;
   margin-bottom: 4px;
@@ -24,7 +24,7 @@ div.radio-nota {
   gap: 1rem;
 }
 
-button {
+.avaliacao-page button {
   width: 100%;
   margin-top: 10px;
   background: var(--color-primary);
@@ -36,7 +36,7 @@ button {
   cursor: pointer;
 }
 
-.btna {
+.avaliacao-page .btna {
   display: inline-block;
   width: 100%;
   text-align: center;
@@ -57,11 +57,12 @@ button {
   transition: background-color 0.2s ease;
 }
 
-.btna:hover {
+.avaliacao-page button:hover,
+.avaliacao-page .btna:hover {
   background-color: var(--color-primary-hover);
 }
 
-form a {
+.avaliacao-page form a {
   display: block;
   text-align: center;
   margin-top: 10px;

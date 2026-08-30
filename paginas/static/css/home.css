@@ -41,7 +41,6 @@
   display: flex;
   gap: 10px;
   margin: auto;
-  display: flex;
 }
 
 .search-box input {
@@ -142,7 +141,7 @@
 }
 
 .btn-login {
-  background: var(--color-action-neutral) !important;
+  background: var(--color-action-neutral);
 }
 
 .empty-result {
@@ -153,11 +152,6 @@
 }
 
 @media (max-width: 1024px) {
-  .navbar {
-    padding-top: 16px;
-    padding-bottom: 16px;
-  }
-
   .principal h1 {
     font-size: 34px;
   }
@@ -168,14 +162,6 @@
 }
 
 @media (max-width: 640px) {
-  .navbar {
-    padding: 14px 14px;
-  }
-
-  .logo {
-    font-size: 18px;
-  }
-
   .principal h1 {
     font-size: 26px;
     line-height: 1.15;
@@ -185,7 +171,6 @@
     font-size: 13px;
     line-height: 1.4;
     margin-bottom: 18px;
-    flex-direction: column;
   }
 
   .search-box {

@@ -180,3 +180,19 @@ footer {
   opacity: 1;
   transform: translateX(0);
 }
+
+@media (max-width: 1024px) {
+  .navbar {
+    padding: 16px 24px;
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar {
+    padding: 14px;
+  }
+
+  .logo {
+    font-size: 18px;
+  }
+}

@@ -46,12 +46,12 @@
   font-weight: 900;
 }
 
-hr {
+.tutor-page hr {
   opacity: 0.5;
   margin: 16px 6px;
 }
 
-section a {
+.tutor-page a {
   display: block;
   text-align: center;
   margin-top: 10px;
@@ -79,8 +79,8 @@ section a {
   margin-bottom: 15px;
 }
 
-input,
-select {
+.tutor-page input,
+.tutor-page select {
   width: 100%;
   border: none;
   outline: none;
@@ -97,7 +97,7 @@ select {
   padding: 0 6px 6px;
 }
 
-button {
+.tutor-page button {
   border: none;
   background: var(--color-primary);
   color: var(--color-text-on-primary);
