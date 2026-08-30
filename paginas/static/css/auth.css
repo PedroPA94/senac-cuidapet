@@ -1,112 +1,99 @@
-.princ {
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 28px 16px;
-}
-
-.card {
+.auth-page {
+  padding: 26px 22px 18px;
+  text-align: center;
   background: var(--color-surface);
   border: 1px solid var(--color-border);
   border-radius: 16px;
-  padding: 26px 22px 18px;
-  text-align: center;
 }
 
-.cadastro-page h1 {
+.auth-page h1 {
+  margin-bottom: 4px;
   font-size: 18px;
   font-weight: 700;
-  margin-bottom: 4px;
 }
 
-.subt {
-  font-size: 12px;
-  color: var(--color-text-muted);
+.auth-page .subt {
   margin-bottom: 16px;
+  color: var(--color-text-muted);
+  font-size: 12px;
 }
 
-.form {
-  text-align: left;
+.auth-page .form {
   margin-top: 2px;
+  text-align: left;
 }
 
-.campo {
+.auth-page .campo {
   display: block;
   margin-bottom: 12px;
 }
 
-.texto {
+.auth-page .texto {
   display: block;
+  margin-bottom: 6px;
+  color: var(--color-text);
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text);
-  margin-bottom: 6px;
 }
 
-.input-classe {
+.auth-page .input-classe {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 10px;
   background: var(--color-surface-muted);
   border: 1px solid var(--color-border);
   border-radius: 10px;
-  padding: 10px 10px;
 }
 
-.cadastro-page input {
+.auth-page input {
   width: 100%;
+  color: var(--color-text);
+  font-size: 12px;
+  background: transparent;
   border: none;
   outline: none;
-  background: transparent;
-  font-size: 12px;
-  color: var(--color-text);
 }
 
-.card a {
-  display: block;
-  text-align: center;
-  margin-top: 10px;
-  font-size: 12px;
-  font-weight: 600;
-  color: var(--color-primary);
-  text-decoration: none;
-}
-
-.cadastro-page button {
+.auth-page button {
   width: 100%;
+  padding: 12px;
   margin-top: 10px;
-  background: var(--color-primary);
   color: var(--color-text-on-primary);
+  font-weight: 700;
+  background: var(--color-primary);
   border: none;
   border-radius: 10px;
-  padding: 12px;
-  font-weight: 700;
   cursor: pointer;
 }
 
-.card .btna {
+.login-page .form a,
+.cadastro-page a {
+  display: block;
+  margin-top: 10px;
+  color: var(--color-primary);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  text-decoration: none;
+}
+
+.cadastro-page .btna {
   display: inline-block;
   width: 100%;
-  text-align: center;
-
-  background-color: var(--color-primary);
+  padding: 12px 0;
   color: var(--color-text-on-primary);
-
-  padding: 12px;
-  padding-right: 0px;
-  padding-left: 0px;
-  border-radius: 10px;
-
   font-size: 13px;
   font-weight: 700;
+  text-align: center;
   text-decoration: none;
-
+  background-color: var(--color-primary);
+  border-radius: 10px;
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
 
-.card .btna:hover {
+.cadastro-page .btna:hover {
   background-color: var(--color-primary-hover);
 }
 
@@ -114,19 +101,15 @@
   margin: 15px 0;
 }
 
-@media (max-width: 420px) {
-  .page {
-    padding: 18px 12px;
-  }
-}
 @media (min-width: 768px) {
-  .card {
+  .auth-page {
     width: 420px;
     padding: 28px 24px 20px;
   }
 }
+
 @media (min-width: 1200px) {
-  .card {
+  .auth-page {
     width: 440px;
   }
 }
