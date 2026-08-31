@@ -143,6 +143,12 @@ class Agendamento(models.Model):
         CARTAO = 'CARTAO', 'Cartão'
         DINHEIRO = 'DINHEIRO', 'Dinheiro'
 
+    class Status(models.TextChoices):
+        PENDENTE = 'PENDENTE', 'Pendente'
+        ACEITO = 'ACEITO', 'Aceito'
+        CONCLUIDO = 'CONCLUIDO', 'Concluído'
+        CANCELADO = 'CANCELADO', 'Cancelado'
+
     usuario = models.ForeignKey(
         'Usuario',
         on_delete=models.CASCADE,
@@ -162,6 +168,7 @@ class Agendamento(models.Model):
     )
 
     forma_pagamento = models.CharField(max_length=20, choices=FormaPagamento.choices, null=False, blank=False)
+    status = models.CharField(max_length=10, choices=Status.choices, default=Status.PENDENTE)
     data_inicio = models.DateTimeField(null=False, blank=False)
     data_fim = models.DateTimeField(null=False, blank=False)
     valor_total = models.DecimalField(max_digits=10, decimal_places=2)
