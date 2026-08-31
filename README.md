@@ -70,7 +70,7 @@ senac-cuidapet/
 
 # Modelo de dados
 
-<img width="821" height="656" alt="DER_CuidaPet" src="https://github.com/user-attachments/assets/5ff434a7-b3e6-4df5-9281-9d4923e74feb" />
+<img width="1402" height="1122" alt="modelo" src="https://github.com/user-attachments/assets/6ae1be9b-db66-49ac-bf99-66fd70d50578" />
 
 <br>
 
