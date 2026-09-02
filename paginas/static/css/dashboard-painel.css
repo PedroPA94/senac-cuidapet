@@ -1,0 +1,518 @@
+
+.cuidador-main {
+    display: block;
+    width: 100%;
+}
+
+/* CONTAINER DA PÁGINA */
+
+.cuidador-container {
+    width: 95%;
+    max-width: 1280px;
+    margin: 30px auto;
+}
+
+.navbar-link,
+.navbar-link:visited {
+    color: var(--color-primary);
+}
+
+
+
+.titulo {
+    margin-bottom: 30px;
+}
+
+.titulo h1 {
+    font-size: 24px;
+    font-weight: 500;
+
+    color: var(--color-text);
+
+    margin-bottom: 14px;
+}
+
+.titulo p {
+    font-size: 15px;
+
+    color: var(--color-text-secondary);
+}
+
+
+
+.resumo {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 20px;
+
+    margin-bottom: 35px;
+}
+
+
+.cards {
+    min-height: 120px;
+
+    background-color: var(--color-surface);
+
+    border-radius: var(--radius-sm);
+
+    padding: 25px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.cards p {
+    font-size: 14px;
+
+    color: var(--color-text-secondary);
+
+    margin-bottom: 12px;
+}
+
+
+.num {
+    display: block;
+
+    font-size: 30px;
+    font-weight: 400;
+}
+
+
+.numero-pendente {
+    color: var(--color-warning);
+}
+
+
+.numero-aceito {
+    color: var(--color-primary);
+}
+
+
+.numero-concluido,
+.numero-ganhos {
+    color: var(--color-success);
+}
+
+
+
+
+.agendamentos > input {
+    display: none;
+}
+
+
+.tabs {
+    height: 60px;
+
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    background-color: var(--color-surface);
+
+    border-radius: var(--radius-sm);
+
+    margin-bottom: 28px;
+
+    overflow: hidden;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+.aba {
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    position: relative;
+
+    font-size: 15px;
+
+    color: var(--color-text-secondary);
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+.aba:hover {
+    background-color: var(--color-surface-muted);
+}
+
+
+
+#aba-pendentes:checked ~ .tabs .aba-pendentes {
+    color: var(--color-warning);
+}
+
+
+#aba-atender:checked ~ .tabs .aba-atender {
+    color: var(--color-primary);
+}
+
+
+#aba-concluidos:checked ~ .tabs .aba-concluidos {
+    color: var(--color-success);
+}
+
+
+
+
+#aba-pendentes:checked ~ .tabs .aba-pendentes::after,
+#aba-atender:checked ~ .tabs .aba-atender::after,
+#aba-concluidos:checked ~ .tabs .aba-concluidos::after {
+    content: "";
+
+    position: absolute;
+
+    bottom: 0;
+    left: 0;
+
+    width: 100%;
+    height: 3px;
+}
+
+
+#aba-pendentes:checked ~ .tabs .aba-pendentes::after {
+    background-color: var(--color-warning);
+}
+
+
+#aba-atender:checked ~ .tabs .aba-atender::after {
+    background-color: var(--color-primary);
+}
+
+
+#aba-concluidos:checked ~ .tabs .aba-concluidos::after {
+    background-color: var(--color-success);
+}
+
+
+
+.conteudo-aba {
+    display: none;
+}
+
+
+.conteudo-aba h2 {
+    font-size: 20px;
+
+    font-weight: 400;
+
+    color: var(--color-text);
+
+    margin-bottom: 17px;
+}
+
+
+
+
+#aba-pendentes:checked ~ .conteudo-pendentes {
+    display: block;
+}
+
+
+
+
+#aba-atender:checked ~ .conteudo-atender {
+    display: block;
+}
+
+
+
+
+#aba-concluidos:checked ~ .conteudo-concluidos {
+    display: block;
+}
+
+
+
+.lista {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
+}
+
+
+
+
+.card-agendamento {
+    width: 100%;
+
+    background-color: var(--color-surface);
+
+    border-left: 5px solid var(--color-primary);
+
+    border-radius: var(--radius-sm);
+
+    padding: 24px;
+
+    box-shadow: var(--shadow-sm);
+}
+
+
+
+.top-card {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+}
+
+
+.top-card h3 {
+    color: var(--color-primary);
+
+    font-weight: 400;
+
+    font-size: 18px;
+
+    margin-bottom: 8px;
+}
+
+
+.top-card p {
+    font-size: 15px;
+
+    color: var(--color-text);
+
+    font-weight: 400;
+}
+
+
+
+.pet {
+    display: flex;
+}
+
+
+.pet-nome {
+    margin-right: 3px;
+}
+
+
+
+.status {
+    padding: 7px 13px;
+
+    border-radius: 4px;
+
+    color: var(--color-text-on-primary);
+
+    font-size: 12px;
+}
+
+
+.status-pendente {
+    background-color: var(--color-warning);
+}
+
+
+.status-aceito {
+    background-color: var(--color-primary);
+}
+
+
+.status-concluido {
+    background-color: var(--color-success);
+}
+
+
+
+.info-agendamento {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    margin-top: 20px;
+}
+
+
+.labels p {
+    font-size: 13px;
+
+    color: var(--color-text-muted);
+
+    margin-bottom: 12px;
+}
+
+
+.valores {
+    text-align: right;
+}
+
+
+.valores p {
+    color: var(--color-text);
+
+    font-size: 13px;
+
+    margin-bottom: 12px;
+}
+
+
+.valores .valor {
+    color: var(--color-success);
+}
+
+
+
+.botoes-card {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 12px;
+
+    margin-top: 4px;
+}
+
+
+.bt-card {
+    width: 100%;
+
+    margin-top: 4px;
+}
+
+
+
+.botoes-card form,
+.bt-card form {
+    width: 100%;
+}
+
+
+.bt {
+    width: 100%;
+
+    height: 41px;
+
+    border: none;
+
+    border-radius: var(--radius-sm);
+
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    color: var(--color-text-on-primary);
+
+    font-size: 15px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+
+
+
+.detalhes {
+    background-color: var(--color-primary);
+}
+
+
+.detalhes:hover {
+    background-color: var(--color-primary-hover);
+}
+
+
+
+
+.aceitar {
+    background-color: var(--color-success);
+}
+
+
+.aceitar:hover {
+    opacity: 0.9;
+}
+
+
+
+
+.recusar {
+    background-color: var(--color-danger);
+}
+
+
+.recusar:hover {
+    opacity: 0.9;
+}
+
+
+
+
+@media (max-width: 900px) {
+
+    .resumo {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}
+
+
+@media (max-width: 650px) {
+
+    .cuidador-container {
+        width: 100%;
+
+        padding-left: 17px;
+        padding-right: 17px;
+    }
+
+
+    .titulo {
+        margin-top: 20px;
+    }
+
+
+    .resumo {
+        grid-template-columns: 1fr;
+    }
+
+
+    .cards {
+        text-align: center;
+    }
+
+
+    .botoes {
+        grid-template-columns: 1fr;
+    }
+
+
+    .info-agendamento {
+        grid-template-columns: 1fr;
+    }
+
+
+    .labels {
+        display: none;
+    }
+
+
+    .valores {
+        text-align: left;
+    }
+
+
+    .botoes-card {
+        grid-template-columns: 1fr;
+    }
+
+
+    .navbar-actions {
+        gap: 12px;
+    }
+
+}
