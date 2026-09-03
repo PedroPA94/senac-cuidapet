@@ -19,6 +19,26 @@
     <form class="form" method="post">
       {% csrf_token %}
 
+      <fieldset class="profile-selector">
+        <legend>Como você deseja entrar?</legend>
+        <div class="profile-options">
+          <label class="profile-option">
+            <input type="radio" name="tipo_usuario" value="TUTOR" {% if tipo_usuario_selecionado == 'TUTOR' %}checked{% endif %} required>
+            <span class="profile-option-content">
+              <i class="fa-solid fa-house"></i>
+              <span><strong>Tutor</strong><small>Quero encontrar cuidados para meu pet</small></span>
+            </span>
+          </label>
+          <label class="profile-option">
+            <input type="radio" name="tipo_usuario" value="CUIDADOR" {% if tipo_usuario_selecionado == 'CUIDADOR' %}checked{% endif %} required>
+            <span class="profile-option-content">
+              <i class="fa-solid fa-paw"></i>
+              <span><strong>Cuidador</strong><small>Quero gerenciar meus atendimentos</small></span>
+            </span>
+          </label>
+        </div>
+      </fieldset>
+
       {% if form.non_field_errors %}
         <div class="form-alert">
           <strong>Erro no login:</strong>
@@ -33,14 +53,14 @@
       <div class="campo">
         <p class="texto">E-mail</p>
         <div class="input-classe">
-          <input type="email" name="username" placeholder="seu@email.com" required />
+          <input type="email" name="username" value="{{ username }}" placeholder="seu@email.com" autocomplete="email" required />
         </div>
       </div>
 
       <div class="campo">
         <p class="texto">Senha</p>
         <div class="input-classe">
-          <input type="password" name="password" placeholder="********" required />
+          <input type="password" name="password" placeholder="********" autocomplete="current-password" required />
         </div>
       </div>
 

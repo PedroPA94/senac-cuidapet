@@ -47,10 +47,12 @@
                 <p>{{ cuidador.descricao }}</p>
                 <p class="card-price">R$ {{ cuidador.valor_diaria }}/dia</p>
                 
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated and user.tipo_usuario == 'TUTOR' %}
                     <a href="{% url 'agendamento_create' cuidador.id %}" class="btn-agendar">
                         Agendar
                     </a>
+                {% elif user.is_authenticated %}
+                    <a href="{% url 'cuidador_solicitacoes' %}" class="btn-agendar">Ver solicitações</a>
                 {% else %}
                     <a href="{% url 'login' %}" class="btn-agendar btn-login">
                         Faça login

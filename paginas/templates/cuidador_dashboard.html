@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Painel do Cuidador | CuidaPet{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/cuidador_dashboard.css' %}">
+{% endblock %}
+
+{% block content %}
+<main class="dashboard-main">
+  <div class="dashboard-container">
+    <section class="dashboard-heading">
+      <div>
+        <p class="dashboard-eyebrow">Painel do cuidador</p>
+        <h1>Bem-vindo, {{ user.first_name|default:'Cuidador' }}!</h1>
+        <p>Gerencie seus agendamentos e acompanhe suas atividades.</p>
+      </div>
+    </section>
+
+    <section class="dashboard-summary" aria-label="Resumo dos serviços">
+      <article class="summary-card summary-pending">
+        <div class="summary-icon"><i class="fa-regular fa-clock"></i></div>
+        <div><p>Solicitações pendentes</p><strong>{{ pendentes|length }}</strong></div>
+      </article>
+      <article class="summary-card summary-accepted">
+        <div class="summary-icon"><i class="fa-regular fa-calendar-check"></i></div>
+        <div><p>Agendamentos aceitos</p><strong>{{ em_andamento|length }}</strong></div>
+      </article>
+      <article class="summary-card summary-finished">
+        <div class="summary-icon"><i class="fa-solid fa-check"></i></div>
+        <div><p>Serviços concluídos</p><strong>{{ concluidos|length }}</strong></div>
+      </article>
+      <article class="summary-card summary-revenue">
+        <div class="summary-icon"><i class="fa-solid fa-coins"></i></div>
+        <div><p>Ganhos concluídos</p><strong>R$ {{ total_ganhos|floatformat:2 }}</strong></div>
+      </article>
+    </section>
+
+    <section class="dashboard-bookings">
+      <input type="radio" name="dashboard-tabs" id="tab-pendentes" checked>
+      <input type="radio" name="dashboard-tabs" id="tab-atender">
+      <input type="radio" name="dashboard-tabs" id="tab-concluidos">
+
+      <div class="dashboard-tabs" role="tablist" aria-label="Situação dos agendamentos">
+        <label for="tab-pendentes" class="dashboard-tab tab-label-pendentes">Pendentes <span>{{ pendentes|length }}</span></label>
+        <label for="tab-atender" class="dashboard-tab tab-label-atender">A atender <span>{{ em_andamento|length }}</span></label>
+        <label for="tab-concluidos" class="dashboard-tab tab-label-concluidos">Histórico <span>{{ historico|length }}</span></label>
+      </div>
+
+      <div class="tab-content tab-content-pendentes">
+        <div class="content-heading"><h2>Solicitações pendentes</h2><p>Analise os dados antes de responder.</p></div>
+        {% include 'includes/dashboard_agendamento_cards.html' with itens=pendentes permitir_decisao=True mensagem_vazia='Nenhuma solicitação aguardando análise.' %}
+      </div>
+
+      <div class="tab-content tab-content-atender">
+        <div class="content-heading"><h2>Agendamentos a atender</h2><p>Serviços que você já confirmou.</p></div>
+        {% include 'includes/dashboard_agendamento_cards.html' with itens=em_andamento permitir_decisao=False mensagem_vazia='Nenhum atendimento confirmado no momento.' %}
+      </div>
+
+      <div class="tab-content tab-content-concluidos">
+        <div class="content-heading"><h2>Histórico de serviços</h2><p>Atendimentos concluídos, recusados ou cancelados.</p></div>
+        {% include 'includes/dashboard_agendamento_cards.html' with itens=historico permitir_decisao=False mensagem_vazia='Seu histórico aparecerá aqui.' %}
+      </div>
+    </section>
+  </div>
+</main>
+{% endblock %}
+

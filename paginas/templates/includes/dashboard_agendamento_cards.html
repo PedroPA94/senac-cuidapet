@@ -1,0 +1,40 @@
+{% if itens %}
+  <div class="booking-list">
+    {% for agendamento in itens %}
+      <article class="booking-card status-border-{{ agendamento.status|lower }}">
+        <div class="booking-main">
+          <div class="booking-person">
+            <div class="pet-avatar"><i class="fa-solid fa-paw"></i></div>
+            <div>
+              <h3>{{ agendamento.usuario.first_name }}</h3>
+              <p>Pet: <strong>{{ agendamento.pet.nome }}</strong> · {{ agendamento.pet.get_especie_display }}</p>
+            </div>
+          </div>
+          <span class="status-badge status-{{ agendamento.status|lower }}">{{ agendamento.get_status_display }}</span>
+        </div>
+
+        <dl class="booking-details">
+          <div><dt>Raça</dt><dd>{{ agendamento.pet.raca }}</dd></div>
+          <div><dt>Período</dt><dd>{{ agendamento.data_inicio|date:'d/m/Y' }} a {{ agendamento.data_fim|date:'d/m/Y' }}</dd></div>
+          <div><dt>Pagamento</dt><dd>{{ agendamento.get_forma_pagamento_display }}</dd></div>
+          <div><dt>Valor</dt><dd class="booking-price">R$ {{ agendamento.valor_total|floatformat:2 }}</dd></div>
+        </dl>
+
+        <div class="booking-actions">
+          <a href="{% url 'cuidador_solicitacao_detail' agendamento.pk %}" class="dashboard-button button-details">Ver detalhes</a>
+          {% if permitir_decisao and agendamento.status == 'PENDENTE' %}
+            <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'aceitar' %}">
+              {% csrf_token %}<button type="submit" class="dashboard-button button-accept">Aceitar</button>
+            </form>
+            <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}">
+              {% csrf_token %}<button type="submit" class="dashboard-button button-reject">Recusar</button>
+            </form>
+          {% endif %}
+        </div>
+      </article>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="dashboard-empty"><i class="fa-regular fa-calendar"></i><p>{{ mensagem_vazia }}</p></div>
+{% endif %}
+
