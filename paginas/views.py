@@ -280,22 +280,69 @@ class CuidadorSolicitacaoDetailView(CuidadorRequiredMixin, DetailView):
 
 
 class CuidadorSolicitacaoStatusView(CuidadorRequiredMixin, View):
-    status_permitidos = {'aceitar': Agendamento.Status.ACEITO, 'recusar': Agendamento.Status.RECUSADO}
+    status_permitidos = {
+        'aceitar': Agendamento.Status.ACEITO,
+        'recusar': Agendamento.Status.RECUSADO,
+        'desistir': Agendamento.Status.CANCELADO,
+        'finalizar': Agendamento.Status.CONCLUIDO,
+    }
 
     def post(self, request, pk, acao):
         novo_status = self.status_permitidos.get(acao)
+
         if not novo_status:
             messages.error(request, "Ação inválida.")
             return redirect('cuidador_solicitacoes')
+
         with transaction.atomic():
-            agendamento = get_object_or_404(Agendamento.objects.select_for_update(), pk=pk, cuidador__usuario=request.user)
-            if agendamento.status != Agendamento.Status.PENDENTE:
-                messages.warning(request, "Esta solicitação já foi analisada e não pode ser alterada.")
-                return redirect('cuidador_solicitacao_detail', pk=agendamento.pk)
+            agendamento = get_object_or_404(
+                Agendamento.objects.select_for_update(),
+                pk=pk,
+                cuidador__usuario=request.user
+            )
+
+            # Aceitar ou recusar: só pode ser feito enquanto estiver pendente
+            if acao in {'aceitar', 'recusar'}:
+                if agendamento.status != Agendamento.Status.PENDENTE:
+                    messages.warning(
+                        request,
+                        "Esta solicitação já foi analisada e não pode ser alterada."
+                    )
+                    return redirect(
+                        'cuidador_solicitacao_detail',
+                        pk=agendamento.pk
+                    )
+
+            # Desistir ou finalizar: só pode ser feito enquanto estiver aceito
+            elif acao in {'desistir', 'finalizar'}:
+                if agendamento.status != Agendamento.Status.ACEITO:
+                    messages.warning(
+                        request,
+                        "Este atendimento não está disponível para esta ação."
+                    )
+                    return redirect(
+                        'cuidador_solicitacao_detail',
+                        pk=agendamento.pk
+                    )
+
             agendamento.status = novo_status
             agendamento.save(update_fields=['status'])
-        messages.success(request, "Solicitação aceita com sucesso." if acao == 'aceitar' else "Solicitação recusada.")
-        return redirect('cuidador_solicitacao_detail', pk=agendamento.pk)
+
+        if acao == 'aceitar':
+            mensagem = "Solicitação aceita com sucesso."
+        elif acao == 'recusar':
+            mensagem = "Solicitação recusada."
+        elif acao == 'desistir':
+            mensagem = "Você desistiu deste atendimento."
+        else:
+            mensagem = "Atendimento finalizado com sucesso."
+
+        messages.success(request, mensagem)
+
+        return redirect(
+            'cuidador_solicitacao_detail',
+            pk=agendamento.pk
+        )
 
 
 class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
