@@ -71,8 +71,8 @@
 }
 
 .summary-pending .summary-icon {
-    background: #fff4d6;
-    color: #9a6700;
+    background: var(--color-warning-soft);
+    color: var(--color-warning-hover);
 }
 
 .summary-accepted .summary-icon {
@@ -82,8 +82,8 @@
 
 .summary-finished .summary-icon,
 .summary-revenue .summary-icon {
-    background: #dcfce7;
-    color: #16803d;
+    background: var(--color-success-soft);
+    color: var(--color-success);
 }
 
 .dashboard-bookings>input {
