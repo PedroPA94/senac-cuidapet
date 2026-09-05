@@ -55,7 +55,7 @@
 
       <div class="tab-content tab-content-atender">
         <div class="content-heading"><h2>Agendamentos a atender</h2><p>Serviços que você já confirmou.</p></div>
-        {% include 'includes/dashboard_agendamento_cards.html' with itens=em_andamento permitir_decisao=False mensagem_vazia='Nenhum atendimento confirmado no momento.' %}
+        {% include 'includes/dashboard_agendamento_cards.html' with itens=em_andamento permitir_decisao=True mensagem_vazia='Nenhum atendimento confirmado no momento.' %}
       </div>
 
       <div class="tab-content tab-content-concluidos">

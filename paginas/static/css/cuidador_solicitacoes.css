@@ -1,0 +1,541 @@
+/* =========================================================
+   PÁGINA DE DETALHES DA SOLICITAÇÃO
+   ========================================================= */
+
+.caregiver-page {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 40px 24px 60px;
+}
+
+/* ---------------------------------------------------------
+   Link voltar
+   --------------------------------------------------------- */
+
+.back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 20px;
+
+  color: var(--color-primary);
+  font-size: 0.95rem;
+  font-weight: 500;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.back-link:hover {
+  color: var(--color-primary-hover);
+  transform: translateX(-3px);
+}
+
+/* ---------------------------------------------------------
+   Card principal
+   --------------------------------------------------------- */
+
+.detail-card {
+  width: 100%;
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: 14px;
+  box-shadow: var(--shadow-md);
+  overflow: hidden;
+}
+
+/* ---------------------------------------------------------
+   Cabeçalho
+   --------------------------------------------------------- */
+
+.detail-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+
+  padding: 28px 32px;
+
+  border-bottom: 1px solid var(--color-border);
+}
+
+.detail-header > div {
+  min-width: 0;
+}
+
+.eyebrow {
+  margin-bottom: 6px;
+
+  color: var(--color-primary);
+  font-size: 0.8rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.detail-header h1 {
+  margin-bottom: 5px;
+
+  color: var(--color-text);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.detail-header p:not(.eyebrow) {
+  color: var(--color-text-muted);
+  font-size: 0.95rem;
+}
+
+/* ---------------------------------------------------------
+   Status
+   --------------------------------------------------------- */
+
+.status {
+  flex-shrink: 0;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 7px 14px;
+
+  border-radius: 999px;
+
+  font-size: 0.82rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Pendente */
+
+.status-pendente {
+  color: #9a6700;
+  background: #fff4d6;
+}
+
+/* Aceito */
+
+.status-aceito,
+.status-confirmado,
+.status-concluido {
+  color: #176b2c;
+  background: #e8f7ec;
+}
+
+/* Recusado */
+
+.status-recusado,
+.status-cancelado {
+  color: var(--color-danger);
+  background: var(--color-danger-soft);
+}
+
+/* ---------------------------------------------------------
+   Seções
+   --------------------------------------------------------- */
+
+.detail-section {
+  padding: 28px 32px;
+}
+
+.detail-section + .detail-section {
+  border-top: 1px solid var(--color-border);
+}
+
+.detail-section h2 {
+  margin-bottom: 20px;
+
+  color: var(--color-text);
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   Grid de informações
+   --------------------------------------------------------- */
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 24px;
+}
+
+.detail-grid > div {
+  min-width: 0;
+  padding: 15px 16px;
+
+  background: var(--color-surface-muted);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+}
+
+.detail-grid dt {
+  margin-bottom: 5px;
+
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+  font-weight: 500;
+}
+
+.detail-grid dd {
+  color: var(--color-text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+/* Valor */
+
+.detail-grid dd.price {
+  color: var(--color-success);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+/* ---------------------------------------------------------
+   Caixa de decisão
+   --------------------------------------------------------- */
+
+.decision-box {
+  margin: 4px 32px 32px;
+  padding: 22px;
+
+  background: var(--color-primary-soft);
+  border: 1px solid #dbe3ff;
+  border-radius: var(--radius-sm);
+}
+
+.decision-box > p {
+  margin-bottom: 18px;
+
+  color: var(--color-text-secondary);
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+/* ---------------------------------------------------------
+   Botões de decisão
+   --------------------------------------------------------- */
+
+.decision-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.decision-actions form {
+  margin: 0;
+}
+
+.btn {
+  min-height: 42px;
+  padding: 10px 20px;
+
+  border: 0;
+  border-radius: var(--radius-sm);
+
+  font-family: var(--font-family-base);
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* Recusar */
+
+.btn-reject {
+  color: var(--color-danger);
+  background: var(--color-surface);
+  border: 1px solid var(--color-danger-border);
+}
+
+.btn-reject:hover {
+  background: var(--color-danger-soft);
+  box-shadow: var(--shadow-sm);
+}
+
+/* Aceitar */
+
+.btn-accept {
+  color: var(--color-text-on-primary);
+  background: var(--color-primary);
+}
+
+.btn-accept:hover {
+  background: var(--color-primary-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------------------------------------------------------
+   Acessibilidade - foco
+   --------------------------------------------------------- */
+
+.back-link:focus-visible,
+.btn:focus-visible {
+  outline: 3px solid rgba(43, 89, 255, 0.25);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------
+   Tablet
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .caregiver-page {
+    padding: 28px 18px 40px;
+  }
+
+  .detail-header {
+    align-items: flex-start;
+    flex-direction: column;
+    padding: 24px;
+  }
+
+  .detail-header h1 {
+    font-size: 1.5rem;
+  }
+
+  .detail-section {
+    padding: 24px;
+  }
+
+  .detail-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .decision-box {
+    margin: 0 24px 24px;
+  }
+
+  .decision-actions {
+    justify-content: stretch;
+  }
+
+  .decision-actions form {
+    flex: 1;
+  }
+
+  .decision-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ---------------------------------------------------------
+   Celular
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+  .caregiver-page {
+    padding: 20px 12px 30px;
+  }
+
+  .detail-card {
+    border-radius: 10px;
+  }
+
+  .detail-header {
+    padding: 20px;
+    gap: 14px;
+  }
+
+  .detail-header h1 {
+    font-size: 1.35rem;
+  }
+
+  .detail-header p:not(.eyebrow) {
+    font-size: 0.85rem;
+  }
+
+  .detail-section {
+    padding: 20px;
+  }
+
+  .detail-section h2 {
+    font-size: 1.05rem;
+  }
+
+  .detail-grid > div {
+    padding: 13px 14px;
+  }
+
+  .decision-box {
+    margin: 0 20px 20px;
+    padding: 18px;
+  }
+
+  .decision-actions {
+    flex-direction: column-reverse;
+    gap: 10px;
+  }
+
+  .decision-actions form {
+    width: 100%;
+  }
+  /* =========================================================
+   ÁREA DE DECISÃO
+   ========================================================= */
+
+.decision-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+
+  margin: 8px 32px 32px;
+  padding: 24px;
+
+  background: var(--color-primary-soft);
+  border: 1px solid #dbe3ff;
+  border-radius: var(--radius-sm);
+}
+
+.decision-content {
+  flex: 1;
+}
+
+.decision-content h2 {
+  margin-bottom: 6px;
+
+  color: var(--color-text);
+  font-size: 1.05rem;
+  font-weight: 600;
+}
+
+.decision-content p {
+  color: var(--color-text-secondary);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
+/* BOTÕES */
+
+.decision-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.decision-actions form {
+  margin: 0;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-width: 120px;
+  height: 44px;
+  padding: 0 20px;
+
+  border-radius: var(--radius-sm);
+
+  font-family: var(--font-family-base);
+  font-size: 0.9rem;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+/* BOTÃO RECUSAR */
+
+.btn-reject {
+  color: var(--color-danger);
+  background: var(--color-surface);
+  border: 1px solid var(--color-danger);
+}
+
+.btn-reject:hover {
+  color: var(--color-text-on-primary);
+  background: var(--color-danger);
+  box-shadow: var(--shadow-sm);
+}
+
+/* BOTÃO ACEITAR */
+
+.btn-accept {
+  color: var(--color-text-on-primary);
+  background: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.btn-accept:hover {
+  background: var(--color-primary-hover);
+  border-color: var(--color-primary-hover);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------------------------------------------------------
+   RESPONSIVO
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+  .decision-box {
+    flex-direction: column;
+    align-items: stretch;
+    margin: 0 24px 24px;
+  }
+
+  .decision-actions {
+    width: 100%;
+  }
+
+  .decision-actions form {
+    flex: 1;
+  }
+
+  .btn {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .decision-box {
+    margin: 0 20px 20px;
+    padding: 18px;
+  }
+
+  .decision-actions {
+    flex-direction: column-reverse;
+  }
+
+  .decision-actions form {
+    width: 100%;
+  }
+ }
+  
+}

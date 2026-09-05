@@ -29,15 +29,69 @@
       <div><dt>Telefone</dt><dd>{{ agendamento.usuario.telefone|default:'Não informado' }}</dd></div>
     </dl></section>
 
-    {% if agendamento.status == 'PENDENTE' %}
-      <div class="decision-box">
-        <p>Confira os dados antes de responder. Esta decisão não poderá ser alterada.</p>
-        <div class="decision-actions">
-          <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}">{% csrf_token %}<button class="btn btn-reject" type="submit">Recusar</button></form>
-          <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'aceitar' %}">{% csrf_token %}<button class="btn btn-accept" type="submit">Aceitar solicitação</button></form>
-        </div>
-      </div>
-    {% endif %}
+    {% if agendamento.status == 'ACEITO' %}
+
+  <section class="decision-box">
+    <div class="decision-content">
+      <h2>Responder à solicitação</h2>
+      <p>
+        Confira os dados do atendimento antes de responder.
+      </p>
+    </div>
+
+    <div class="decision-actions">
+
+      <form method="post"
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'desistir' %}">
+        {% csrf_token %}
+        <button class="btn btn-reject" type="submit">
+          Desistir
+        </button>
+      </form>
+
+      <form method="post"
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'finalizar' %}">
+        {% csrf_token %}
+        <button class="btn btn-accept" type="submit">
+          Finalizar atendimento
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+{% elif agendamento.status == 'A_ATENDER' %}
+
+  <section class="decision-box">
+    <div class="decision-content">
+      <h2>Atendimento pendente</h2>
+      <p>
+        Esta solicitação foi aceita. Inicie o serviço quando estiver pronto.
+      </p>
+    </div>
+
+    <div class="decision-actions">
+
+      <form method="post"
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'desistir' %}">
+        {% csrf_token %}
+        <button class="btn btn-reject" type="submit">
+          Desistir
+        </button>
+      </form>
+
+      <form method="post"
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'finalizar' %}">
+        {% csrf_token %}
+        <button class="btn btn-accept" type="submit">
+          Finalizar atendimento
+        </button>
+      </form>
+
+    </div>
+  </section>
+
+{% endif %}
   </article>
 </div>
 {% endblock %}
