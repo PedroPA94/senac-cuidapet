@@ -53,7 +53,7 @@
                 </div>
               </div>
 
-              <p class="status-line">Status: <strong>{{ agendamento.get_status_display }}</strong></p>
+              <span class="status-badge status-{{ agendamento.status|lower }}">{{ agendamento.get_status_display }}</span>
 
               {% if agendamento.status == 'CONCLUIDO' and agendamento.avaliacao %}
                 <div class="avaliacao-container">

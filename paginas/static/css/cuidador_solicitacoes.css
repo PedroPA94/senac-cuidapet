@@ -90,50 +90,6 @@
 }
 
 /* ---------------------------------------------------------
-   Status
-   --------------------------------------------------------- */
-
-.status {
-  flex-shrink: 0;
-
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  padding: 7px 14px;
-
-  border-radius: 999px;
-
-  font-size: 0.82rem;
-  font-weight: 600;
-  white-space: nowrap;
-}
-
-/* Pendente */
-
-.status-pendente {
-  color: #9a6700;
-  background: #fff4d6;
-}
-
-/* Aceito */
-
-.status-aceito,
-.status-confirmado,
-.status-concluido {
-  color: #176b2c;
-  background: #e8f7ec;
-}
-
-/* Recusado */
-
-.status-recusado,
-.status-cancelado {
-  color: var(--color-danger);
-  background: var(--color-danger-soft);
-}
-
-/* ---------------------------------------------------------
    Seções
    --------------------------------------------------------- */
 

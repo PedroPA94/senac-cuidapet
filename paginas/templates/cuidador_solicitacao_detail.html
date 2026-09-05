@@ -10,7 +10,7 @@
   <article class="detail-card">
     <header class="detail-header">
       <div><p class="eyebrow">Solicitação #{{ agendamento.pk }}</p><h1>{{ agendamento.pet.nome }}</h1><p>Pedido enviado por {{ agendamento.usuario.first_name }}</p></div>
-      <span class="status status-{{ agendamento.status|lower }}">{{ agendamento.get_status_display }}</span>
+      <span class="status-badge status-{{ agendamento.status|lower }}">{{ agendamento.get_status_display }}</span>
     </header>
 
     <section class="detail-section"><h2>Dados do atendimento</h2><dl class="detail-grid">
