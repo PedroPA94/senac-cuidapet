@@ -1,13 +1,24 @@
 from django.urls import path
-
 from . import views
 
 urlpatterns = [
-    path("", views.index, name="index"),
-    path('login/', views.login, name='login'),
+    # Páginas gerais
+    path("", views.home, name="home"),
+    path('login/', views.login_view, name='login'),
+    path('logout/', views.logout_view, name='logout'),
     path('cadastro/', views.cadastro, name='cadastro'),
     path('home/', views.home, name='home'),
-    path('cuidador/', views.cuidador, name='cuidador'),
-    path('tutor/', views.tutor, name='tutor'),
-    path('agendamento/', views.agendamento, name='agendamento'),
+    
+    # Cadastro Tutor
+    path('tutor/register/', views.TutorCreateView.as_view(), name='tutor_create'),
+
+    # Cadastro Cuidador
+    path('cuidador/register/', views.CuidadorCreateView.as_view(), name='cuidador_create'),
+        
+    # Agendamentos
+    path('agendamentos/', views.AgendamentoListView.as_view(), name='agendamento_list'),
+    path('agendamentos/novo/<int:cuidador_id>/', views.AgendamentoCreateView.as_view(), name='agendamento_create'),
+    
+    # Avaliações
+    path('avaliacoes/<int:agendamento_id>/', views.AvaliacaoCreateView.as_view(), name='avaliacao_create'),
 ]

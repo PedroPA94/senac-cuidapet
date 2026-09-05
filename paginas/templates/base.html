@@ -1,0 +1,89 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+
+    <title>{% block title %}CuidaPet{% endblock %}</title>    
+    {% block css %}{% endblock %}
+
+  </head>
+
+  <body>
+
+    <div id="toast-container">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="toast {{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+    <header class="navbar">
+        <div class="logo">
+            <a href="{% url 'home' %}">
+                <span>
+                    <i class="fa-solid fa-paw"></i>
+                    CuidaPet
+                </span>
+            </a>
+        </div>
+        {% if request.resolver_match.url_name == "home" and user.is_authenticated %}
+            <nav class="navbar-actions">
+                <a href="{% url 'agendamento_list' %}" class="navbar-link">
+                    Meus agendamentos
+                </a>
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit" class="navbar-link navbar-logout">Sair</button>
+                </form>
+            </nav>
+        {% elif not user.is_authenticated %}
+            <a href="{% url 'login' %}" class="navbar-link">
+                Login
+            </a>
+        {% endif %}
+    </header>
+    
+    <main>
+
+        {% block content %}
+        {% endblock %}
+
+    </main>
+
+    <footer >
+        <p>@Copyright 2026 - CuidaPet</p>
+    </footer>
+    
+
+    <script>
+         // Código para exibição de toasts
+        document.addEventListener("DOMContentLoaded", () => {
+            const toasts = document.querySelectorAll("#toast-container .toast");
+            toasts.forEach((toast, index) => {
+               
+                setTimeout(() => {
+                    toast.classList.add("show");
+                    setTimeout(() => {
+                        toast.classList.remove("show");
+                        setTimeout(() => toast.remove(), 500);
+                    }, 4000);
+
+                }, index * 200);
+            });
+        });
+    </script>
+  </body>
+</html>

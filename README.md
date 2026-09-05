@@ -4,8 +4,6 @@ O **CuidaPet** é um sistema proposto para conectar tutores de pets a cuidadores
 
 Esta implementação corresponde à Prova de Conceito (POC) do projeto, contemplando exclusivamente a jornada de usuário de um tutor que busca um cuidador.
 
-O presente trabalho é parte da disciplina **“Projeto Integrador: Desenvolvimento de Sistemas Orientado a Dispositivos Móveis e Baseados na Web”**, do curso de **Análise e Desenvolvimento de Sistemas do SENAC**.
-
 A prova de conceito tem como objetivo validar o fluxo principal do sistema, permitindo que tutores:
 
 * Se cadastrar na plataforma
@@ -13,10 +11,66 @@ A prova de conceito tem como objetivo validar o fluxo principal do sistema, perm
 * Realizem agendamentos
 * Deixem avaliações
 
+## Sobre o Projeto
+
+O presente trabalho é parte da disciplina **"Projeto Integrador: Desenvolvimento de Sistemas Orientado a Dispositivos Móveis e Baseados na Web"**, do curso de **Análise e Desenvolvimento de Sistemas do SENAC**.
+
+### Integrantes do Grupo
+
+* Cesar Alencar Delfino
+* Guilherme Oliveira Silva
+* Letycia Iwme Mangolin
+* Pedro Papini de Araujo
+* Samuel Siqueira Borges
+
+### Metodologia
+
+Durante o desenvolvimento, foi utilizada **programação em pares** em diversos momentos, promovendo colaboração e troca de conhecimento.
+
 ## Tecnologias Utilizadas
 
 * Python 3.12.12
 * Django 6.0.2
+
+<br>
+
+# Vídeo demonstrativo
+
+
+https://github.com/user-attachments/assets/8701eb9b-de78-4b44-942c-f138ababf2f5
+
+
+<br>
+
+# Estrutura do Projeto
+
+```
+senac-cuidapet/
+├── paginas/                          # App principal do Django
+│   ├── models.py                     # Modelos de dados
+│   ├── views.py                      # Views
+│   ├── forms.py                      # Formulários
+│   ├── urls.py                       # Rotas da aplicação
+│   ├── static/
+│   │   └── css/                      # Estilos CSS
+│   └── templates/                    # Templates HTML
+│       ├── login.html                # Página de login
+│       ├── home.html                 # Home - lista de cuidadores com filtros
+│       ├── tutor_form.html           # Cadastro de tutor + pet
+│       ├── cuidador_form.html        # Cadastro de cuidador + serviços
+│       ├── agendamento_form.html     # Formulário de agendamento
+│       ├── agendamento_list.html     # Lista de agendamentos do usuário
+│       └── avaliacao_form.html       # Formulário de avaliação
+├── setup/                            # Configurações do Django
+├── manage.py                         # CLI do Django
+├── requirements.txt                  # Dependências do projeto
+```
+
+<br>
+
+# Modelo de dados
+
+<img width="1402" height="1122" alt="modelo" src="https://github.com/user-attachments/assets/6ae1be9b-db66-49ac-bf99-66fd70d50578" />
 
 <br>
 
@@ -75,3 +129,5 @@ python manage.py runserver
 O sistema estará disponível em:
 
 [http://127.0.0.1:8000/](http://127.0.0.1:8000/)
+
+<br>

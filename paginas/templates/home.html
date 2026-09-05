@@ -1,72 +1,66 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-	<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>CuidaPet</title>
+{% block title %}CuidaPet{% endblock %}
 
-  <link rel="stylesheet" href="...">
-  <link rel="stylesheet" href="...">
-  <link rel="stylesheet" href="{% static 'css/home.css' %}" />
-    
-</head>
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/home.css' %}">
+{% endblock %}
 
-<body>
-  <header class="navbar">
-    <div class="logo">
-         <span>
-            <i class="fa-solid fa-paw"></i>
-            CuidaPet
-         </span>
-    </div>
-  </header>
-
-
+{% block content %}
 
 <section class="principal container">
-    <div >
-
+    <div>
         <h1>Encontre o Cuidador Perfeito para seu Pet</h1>
+        <p>Milhares de cuidadores verificados prontos para dar todo carinho e atenção que seu amigo merece</p>
 
-        <p>
-            Milhares de cuidadores verificados prontos para dar todo carinho e atenção que seu amigo merece
-        </p>
+        <form class="search-box" method="get">
+            <select name="uf">
+                <option value="">-- Selecione Estado --</option>
+                {% for sigla, nome in ufs %}
+                    <option value="{{ sigla }}" {% if uf_filtro == sigla %}selected{% endif %}>{{ sigla }} - {{ nome }}</option>
+                {% endfor %}
+            </select>
 
-     
-        <div class="search-box">
+            <input type="text" name="cidade" placeholder="Cidade (opcional)" value="{{ cidade_filtro }}">
 
-            <input type="text" placeholder="Onde você está?">
-          
-
-            <button class="btn-search">Buscar</button>
-
-        </div>
+            <button type="submit" class="btn-search">Buscar</button>
+            
+            {% if uf_filtro or cidade_filtro %}
+                <a href="{% url 'home' %}" class="btn-clear">Limpar</a>
+            {% endif %}
+        </form>
     </div>
 </section>
 
-
-
-
 <section class="cards">
-  
-    <div class="card">
-        <img src="#" alt="cuidador">
-        <h3>Paulo</h3>
-        <p>Cuidadora experiente - 5 anos</p>
-    </div>
+    {% if cuidadores %}
+        {% for cuidador in cuidadores %}
+            <div class="card">
+                {% if cuidador.foto and cuidador.foto.url %}
+                    <img src="{{ cuidador.foto.url }}" alt="{{ cuidador.usuario.first_name }}">
+                {% else %}
+                    <img src="https://www.petz.com.br/blog/wp-content/uploads/2023/06/dia-do-pet-sitter5.webp" alt="{{ cuidador.usuario.first_name }}">
+                {% endif %}
+                <h3>{{ cuidador.usuario.first_name }}</h3>
+                <p class="card-location">{{ cuidador.cidade }}/{{ cuidador.uf }}</p>
+                <p>{{ cuidador.descricao }}</p>
+                <p class="card-price">R$ {{ cuidador.valor_diaria }}/dia</p>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'agendamento_create' cuidador.id %}" class="btn-agendar">
+                        Agendar
+                    </a>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn-agendar btn-login">
+                        Faça login
+                    </a>
+                {% endif %}
+            </div>
+        {% endfor %}
+    {% else %}
+        <p class="empty-result">Nenhum cuidador encontrado para os filtros selecionados.</p>
+    {% endif %}
+</section>
 
- </section>
- <footer >
-        <p>@Copyright 2026 - CuidaPet</p>
- </footer>
-  
-
-
-
-</body>
-<!--Gui passou por aqui-->
-
-</html>
+{% endblock %}
