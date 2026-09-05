@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>CuidaPet - HOME Cuidador</title>
+
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous"
+        referrerpolicy="no-referrer"
+    >
+
+   
+    <link rel="stylesheet" href="/public/css/fonts.css">
+    <link rel="stylesheet" href="/public/css/global.css">
+    <link rel="stylesheet" href="{% static 'css/dashboard-painel.css' %}" />
+
+    
+    <link rel="stylesheet" href="index.css">
+</head>
+
+
+<body>
+
+    
+    <header class="navbar">
+
+        <a href="index.html" class="logo">
+            <i class="fa-solid fa-paw"></i>
+            CuidaPet
+        </a>
+
+        <nav class="navbar-actions">
+
+
+            <a href="index.html" class="navbar-link">
+                Painel do Cuidador
+            </a>
+
+            <a href="#" class="navbar-link">
+                Sair
+            </a>
+
+        </nav>
+
+    </header>
+
+
+    
+    <main class="cuidador-main">
+
+        <div class="cuidador-container">
+
+            <!-- TÍTULO -->
+            <section class="titulo">
+
+                <h1>Bem-vindo, Cuidador!</h1>
+
+                <p>
+                    Gerencie seus agendamentos e acompanhe suas atividades
+                </p>
+
+            </section>
+
+
+           
+            <section class="resumo">
+
+                <div class="cards">
+
+                    <p>Solicitações Pendentes</p>
+
+                    <div class="num numero-pendente">
+                        1
+                    </div>
+
+                </div>
+
+
+                <div class="cards">
+
+                    <p>Agendamentos Aceitos</p>
+
+                    <div class="num numero-aceito">
+                        2
+                    </div>
+
+                </div>
+
+
+                <div class="cards">
+
+                    <p>Serviços Concluídos</p>
+
+                    <div class="num numero-concluido">
+                        3
+                    </div>
+
+                </div>
+
+
+                <div class="cards">
+
+                    <p>Ganhos Totais</p>
+
+                    <div class="num numero-ganhos">
+                        R$ 460.00
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        
+
+
+            
+            <section
+                class="agendamentos"
+                id="solicitacoes"
+            >
+
+                <!-- CONTROLE DAS ABAS -->
+                <input
+                    type="radio"
+                    name="tabs"
+                    id="aba-pendentes"
+                    checked
+                >
+
+                <input
+                    type="radio"
+                    name="tabs"
+                    id="aba-atender"
+                >
+
+                <input
+                    type="radio"
+                    name="tabs"
+                    id="aba-concluidos"
+                >
+
+
+                
+                <div class="tabs">
+
+                    <label
+                        for="aba-pendentes"
+                        class="aba aba-pendentes"
+                    >
+                        Pendentes
+                    </label>
+
+                    <label
+                        for="aba-atender"
+                        class="aba aba-atender"
+                    >
+                        A Atender
+                    </label>
+
+                    <label
+                        for="aba-concluidos"
+                        class="aba aba-concluidos"
+                    >
+                        Concluídos
+                    </label>
+
+                </div>
+
+
+               
+                <div class="conteudo-aba conteudo-pendentes">
+
+                    <h2>Solicitações Pendentes</h2>
+
+                    <div class="lista">
+
+                        <article class="card-agendamento">
+
+                            <div class="top-card">
+
+                                <div>
+
+                                    <h3>Mariana Souza</h3>
+
+                                    <div class="pet">
+                                        <p class="pet-nome">Pet:</p>
+                                        <p>Mel</p>
+                                    </div>
+
+                                </div>
+
+
+                                <span class="status status-pendente">
+                                    Pendente
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-agendamento">
+
+                                <div class="labels">
+
+                                    <p>Serviço:</p>
+                                    <p>Período:</p>
+                                    <p>Valor:</p>
+
+                                </div>
+
+
+                                <div class="valores">
+
+                                    <p>Hospedagem</p>
+                                    <p>12/08/2026 a 15/08/2026</p>
+
+                                    <p class="valor">
+                                        R$ 360.00
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="botoes-card">
+
+                                <form
+                                    action=""
+                                    method="get"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="bt detalhes"
+                                    >
+                                        Ver detalhes
+                                    </button>
+                                </form>
+
+
+                                <form
+                                    action=""
+                                    method="post"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="bt aceitar"
+                                    >
+                                        Aceitar
+                                    </button>
+                                </form>
+
+
+                                <form
+                                    action=""
+                                    method="post"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="bt recusar"
+                                    >
+                                        Recusar
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+
+                <div class="conteudo-aba conteudo-atender">
+
+                    <h2>Agendamentos a Atender</h2>
+
+                    <div class="lista">
+
+                        <article class="card-agendamento">
+
+                            <div class="top-card">
+
+                                <div>
+
+                                    <h3>Carlos Lima</h3>
+
+                                    <div class="pet">
+                                        <p class="pet-nome">Pet:</p>
+                                        <p>Thor</p>
+                                    </div>
+
+                                </div>
+
+
+                                <span class="status status-aceito">
+                                    Aceito
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-agendamento">
+
+                                <div class="labels">
+
+                                    <p>Serviço:</p>
+                                    <p>Período:</p>
+                                    <p>Valor:</p>
+
+                                </div>
+
+
+                                <div class="valores">
+
+                                    <p>Visita domiciliar</p>
+                                    <p>18/08/2026</p>
+
+                                    <p class="valor">
+                                        R$ 100.00
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="bt-card">
+
+                                <form
+                                    action=""
+                                    method="get"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="bt detalhes"
+                                    >
+                                        Ver detalhes
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="conteudo-aba conteudo-concluidos">
+
+                    <h2>Serviços Concluídos</h2>
+
+                    <div class="lista">
+
+                        <article class="card-agendamento">
+
+                            <div class="top-card">
+
+                                <div>
+
+                                    <h3>Fernanda Alves</h3>
+
+                                    <div class="pet">
+                                        <p class="pet-nome">Pet:</p>
+                                        <p>Luna</p>
+                                    </div>
+
+                                </div>
+
+
+                                <span class="status status-concluido">
+                                    Concluído
+                                </span>
+
+                            </div>
+
+
+                            <div class="info-agendamento">
+
+                                <div class="labels">
+
+                                    <p>Serviço:</p>
+                                    <p>Período:</p>
+                                    <p>Valor:</p>
+
+                                </div>
+
+
+                                <div class="valores">
+
+                                    <p>Passeio</p>
+                                    <p>05/08/2026</p>
+
+                                    <p class="valor">
+                                        R$ 80.00
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="bt-card">
+
+                                <form
+                                    action=""
+                                    method="get"
+                                >
+                                    <button
+                                        type="submit"
+                                        class="bt detalhes"
+                                    >
+                                        Ver detalhes
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </main>
+
+</body>
+</html>
