@@ -39,11 +39,13 @@
                 </span>
             </a>
         </div>
-        {% if request.resolver_match.url_name == "home" and user.is_authenticated %}
+        {% if user.is_authenticated %}
             <nav class="navbar-actions">
-                <a href="{% url 'agendamento_list' %}" class="navbar-link">
-                    Meus agendamentos
-                </a>
+                {% if user.tipo_usuario == 'CUIDADOR' %}
+                    <a href="{% url 'cuidador_solicitacoes' %}" class="navbar-link">Solicitações e histórico</a>
+                {% else %}
+                    <a href="{% url 'agendamento_list' %}" class="navbar-link">Meus agendamentos</a>
+                {% endif %}
                 <form method="post" action="{% url 'logout' %}">
                     {% csrf_token %}
                     <button type="submit" class="navbar-link navbar-logout">Sair</button>

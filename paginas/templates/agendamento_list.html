@@ -53,12 +53,14 @@
                 </div>
               </div>
 
-              {% if agendamento.avaliacao %}
+              <p class="status-line">Status: <strong>{{ agendamento.get_status_display }}</strong></p>
+
+              {% if agendamento.status == 'CONCLUIDO' and agendamento.avaliacao %}
                 <div class="avaliacao-container">
                   <p class="avaliacao-title">Avaliação deixada</p>
                   <p class="avaliacao-nota">Nota: {{ agendamento.avaliacao.nota }}/5</p>
                 </div>
-              {% else %}
+              {% elif agendamento.status == 'CONCLUIDO' %}
                 <a href="{% url 'avaliacao_create' agendamento.id %}" class="avaliar-button">
                   Deixar Avaliação
                 </a>

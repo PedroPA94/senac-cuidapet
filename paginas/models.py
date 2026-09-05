@@ -146,6 +146,7 @@ class Agendamento(models.Model):
     class Status(models.TextChoices):
         PENDENTE = 'PENDENTE', 'Pendente'
         ACEITO = 'ACEITO', 'Aceito'
+        RECUSADO = 'RECUSADO', 'Recusado'
         CONCLUIDO = 'CONCLUIDO', 'Concluído'
         CANCELADO = 'CANCELADO', 'Cancelado'
 

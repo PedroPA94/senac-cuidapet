@@ -18,6 +18,9 @@ urlpatterns = [
     # Agendamentos
     path('agendamentos/', views.AgendamentoListView.as_view(), name='agendamento_list'),
     path('agendamentos/novo/<int:cuidador_id>/', views.AgendamentoCreateView.as_view(), name='agendamento_create'),
+    path('cuidador/solicitacoes/', views.CuidadorSolicitacoesView.as_view(), name='cuidador_solicitacoes'),
+    path('cuidador/solicitacoes/<int:pk>/', views.CuidadorSolicitacaoDetailView.as_view(), name='cuidador_solicitacao_detail'),
+    path('cuidador/solicitacoes/<int:pk>/<str:acao>/', views.CuidadorSolicitacaoStatusView.as_view(), name='cuidador_solicitacao_status'),
     
     # Avaliações
     path('avaliacoes/<int:agendamento_id>/', views.AvaliacaoCreateView.as_view(), name='avaliacao_create'),

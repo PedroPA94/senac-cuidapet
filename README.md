@@ -2,7 +2,7 @@
 
 O **CuidaPet** é um sistema proposto para conectar tutores de pets a cuidadores disponíveis para prestação de serviços.
 
-Esta implementação corresponde à Prova de Conceito (POC) do projeto, contemplando exclusivamente a jornada de usuário de um tutor que busca um cuidador.
+Esta implementação corresponde à Prova de Conceito (POC) do projeto e contempla as jornadas de tutores e cuidadores.
 
 A prova de conceito tem como objetivo validar o fluxo principal do sistema, permitindo que tutores:
 
@@ -10,6 +10,70 @@ A prova de conceito tem como objetivo validar o fluxo principal do sistema, perm
 * Cadastrem seus pets
 * Realizem agendamentos
 * Deixem avaliações
+
+Os cuidadores podem:
+
+* Consultar solicitações recebidas
+* Analisar os dados do atendimento, tutor e pet
+* Aceitar ou recusar agendamentos pendentes
+* Acompanhar serviços aceitos e o histórico de atendimentos
+
+## Como funciona a jornada do cuidador
+
+### 1. Login e direcionamento
+
+Na tela de login, o usuário seleciona se deseja entrar como **Tutor** ou
+**Cuidador**. O sistema valida se a opção corresponde ao tipo cadastrado na
+conta e impede o acesso por uma jornada incompatível. Após autenticar, um perfil do tipo
+`CUIDADOR` é direcionado automaticamente para o painel de solicitações. Tutores
+continuam sendo direcionados para a página inicial.
+
+### 2. Consulta das solicitações
+
+O painel mostra exclusivamente os agendamentos vinculados ao cuidador logado e
+organiza os registros em três grupos:
+
+* **Novas solicitações:** agendamentos com status `PENDENTE`.
+* **Próximos serviços:** agendamentos já `ACEITO` pelo cuidador.
+* **Histórico:** agendamentos `RECUSADO`, `CONCLUIDO` ou `CANCELADO`.
+
+Cada cartão apresenta pet, tutor, período, valor e status atual.
+
+O topo do dashboard apresenta quatro indicadores calculados com os dados do
+cuidador autenticado: solicitações pendentes, agendamentos aceitos, serviços
+concluídos e ganhos acumulados. Os ganhos consideram exclusivamente o valor dos
+atendimentos com status `CONCLUIDO`.
+
+### 3. Análise dos detalhes
+
+Ao selecionar **Ver detalhes**, o cuidador consulta período e valor do
+atendimento, forma de pagamento, dados do pet e contato do tutor. A aplicação
+valida que o agendamento pertence ao cuidador autenticado; solicitações de
+outros profissionais retornam página não encontrada.
+
+### 4. Aceite ou recusa
+
+Uma solicitação `PENDENTE` oferece as ações **Aceitar solicitação** e
+**Recusar**. As duas ações usam requisições POST protegidas por CSRF. A alteração
+é executada dentro de uma transação e com bloqueio do registro, evitando duas
+decisões simultâneas sobre o mesmo agendamento.
+
+Depois da primeira decisão, o status não pode ser alterado por essa tela. Isso
+evita que um atendimento confirmado seja recusado acidentalmente, ou o inverso.
+
+### 5. Acompanhamento do histórico
+
+Após a decisão, o registro muda automaticamente de grupo no painel. Solicitações
+aceitas ficam em **Próximos serviços**; recusadas, concluídas e canceladas ficam
+em **Histórico**. O tutor também visualiza o status atualizado em sua lista de
+agendamentos e só pode avaliar atendimentos concluídos.
+
+### 6. Permissões e segurança
+
+Todas as páginas da jornada exigem autenticação e perfil `CUIDADOR`. As consultas
+sempre filtram pelo cuidador logado, tanto na listagem quanto no detalhe e nas
+ações de mudança de status. Assim, um cuidador não consegue consultar ou alterar
+solicitações pertencentes a outro profissional.
 
 ## Sobre o Projeto
 

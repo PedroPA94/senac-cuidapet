@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Detalhes da solicitação | CuidaPet{% endblock %}
+{% block css %}<link rel="stylesheet" href="{% static 'css/cuidador_solicitacoes.css' %}">{% endblock %}
+
+{% block content %}
+<div class="caregiver-page detail-page">
+  <a class="back-link" href="{% url 'cuidador_solicitacoes' %}">← Voltar às solicitações</a>
+  <article class="detail-card">
+    <header class="detail-header">
+      <div><p class="eyebrow">Solicitação #{{ agendamento.pk }}</p><h1>{{ agendamento.pet.nome }}</h1><p>Pedido enviado por {{ agendamento.usuario.first_name }}</p></div>
+      <span class="status status-{{ agendamento.status|lower }}">{{ agendamento.get_status_display }}</span>
+    </header>
+
+    <section class="detail-section"><h2>Dados do atendimento</h2><dl class="detail-grid">
+      <div><dt>Início</dt><dd>{{ agendamento.data_inicio|date:'d/m/Y H:i' }}</dd></div>
+      <div><dt>Término</dt><dd>{{ agendamento.data_fim|date:'d/m/Y H:i' }}</dd></div>
+      <div><dt>Pagamento</dt><dd>{{ agendamento.get_forma_pagamento_display }}</dd></div>
+      <div><dt>Valor total</dt><dd class="price">R$ {{ agendamento.valor_total }}</dd></div>
+    </dl></section>
+
+    <section class="detail-section"><h2>Pet e tutor</h2><dl class="detail-grid">
+      <div><dt>Pet</dt><dd>{{ agendamento.pet.nome }}</dd></div>
+      <div><dt>Espécie</dt><dd>{{ agendamento.pet.get_especie_display }}</dd></div>
+      <div><dt>Raça</dt><dd>{{ agendamento.pet.raca }}</dd></div>
+      <div><dt>Nascimento</dt><dd>{{ agendamento.pet.data_nascimento|date:'d/m/Y' }}</dd></div>
+      <div><dt>Tutor</dt><dd>{{ agendamento.usuario.first_name }}</dd></div>
+      <div><dt>Telefone</dt><dd>{{ agendamento.usuario.telefone|default:'Não informado' }}</dd></div>
+    </dl></section>
+
+    {% if agendamento.status == 'PENDENTE' %}
+      <div class="decision-box">
+        <p>Confira os dados antes de responder. Esta decisão não poderá ser alterada.</p>
+        <div class="decision-actions">
+          <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}">{% csrf_token %}<button class="btn btn-reject" type="submit">Recusar</button></form>
+          <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'aceitar' %}">{% csrf_token %}<button class="btn btn-accept" type="submit">Aceitar solicitação</button></form>
+        </div>
+      </div>
+    {% endif %}
+  </article>
+</div>
+{% endblock %}
+

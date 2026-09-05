@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView, FormView, View, ListView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views.generic import CreateView, FormView, View, ListView, DetailView
+from django.contrib.auth.mixins import AccessMixin, LoginRequiredMixin
 from django.contrib.auth import authenticate, login, logout
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db import IntegrityError
+from django.db import transaction
+from django.db.models import Sum
 from decimal import Decimal
 
 from .models import Cuidador, Agendamento
@@ -22,17 +24,34 @@ def login_view(request):
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
+        tipo_usuario = request.POST.get('tipo_usuario')
+
+        tipos_validos = {'TUTOR', 'CUIDADOR'}
+        if tipo_usuario not in tipos_validos:
+            messages.error(request, "Selecione se deseja entrar como tutor ou cuidador.")
+            return render(request, 'login.html', {
+                'username': username,
+                'tipo_usuario_selecionado': tipo_usuario,
+            })
         
         user = authenticate(request, username=username, password=password)
         
-        if user is not None:
+        if user is not None and user.tipo_usuario == tipo_usuario:
             login(request, user)
             messages.success(request, f"Bem-vindo, {user.first_name}!")
+            if user.tipo_usuario == 'CUIDADOR':
+                return redirect('cuidador_solicitacoes')
             return redirect('home')
+        elif user is not None:
+            perfil_correto = user.get_tipo_usuario_display().lower()
+            messages.error(request, f"Esta conta está cadastrada como {perfil_correto}. Selecione a opção correta para entrar.")
         else:
             messages.error(request, "Email ou senha inválidos. Tente novamente.")
     
-    return render(request, 'login.html')
+    return render(request, 'login.html', {
+        'username': request.POST.get('username', ''),
+        'tipo_usuario_selecionado': request.POST.get('tipo_usuario', ''),
+    })
 
 
 def logout_view(request):
@@ -212,6 +231,71 @@ class AgendamentoListView(LoginRequiredMixin, ListView):
 
     def get_queryset(self):
         return Agendamento.objects.filter(usuario=self.request.user).select_related('cuidador', 'pet').order_by('-data_criacao')
+
+
+class CuidadorRequiredMixin(LoginRequiredMixin, AccessMixin):
+    """Restringe páginas operacionais ao perfil de cuidador."""
+
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated and request.user.tipo_usuario != 'CUIDADOR':
+            messages.error(request, "Esta área é exclusiva para cuidadores.")
+            return redirect('home')
+        return super().dispatch(request, *args, **kwargs)
+
+
+class CuidadorSolicitacoesView(CuidadorRequiredMixin, ListView):
+    model = Agendamento
+    template_name = 'cuidador_dashboard.html'
+    context_object_name = 'solicitacoes'
+
+    def get_queryset(self):
+        return (Agendamento.objects.filter(cuidador__usuario=self.request.user)
+                .select_related('usuario', 'pet', 'cuidador').order_by('-data_criacao'))
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        solicitacoes = list(context['solicitacoes'])
+        context['pendentes'] = [item for item in solicitacoes if item.status == Agendamento.Status.PENDENTE]
+        context['em_andamento'] = [item for item in solicitacoes if item.status == Agendamento.Status.ACEITO]
+        context['concluidos'] = [item for item in solicitacoes if item.status == Agendamento.Status.CONCLUIDO]
+        context['historico'] = [item for item in solicitacoes if item.status in {
+            Agendamento.Status.RECUSADO, Agendamento.Status.CONCLUIDO, Agendamento.Status.CANCELADO,
+        }]
+        context['total_ganhos'] = (
+            self.get_queryset()
+            .filter(status=Agendamento.Status.CONCLUIDO)
+            .aggregate(total=Sum('valor_total'))['total'] or Decimal('0.00')
+        )
+        return context
+
+
+class CuidadorSolicitacaoDetailView(CuidadorRequiredMixin, DetailView):
+    model = Agendamento
+    template_name = 'cuidador_solicitacao_detail.html'
+    context_object_name = 'agendamento'
+
+    def get_queryset(self):
+        return (Agendamento.objects.filter(cuidador__usuario=self.request.user)
+                .select_related('usuario', 'pet', 'cuidador'))
+
+
+class CuidadorSolicitacaoStatusView(CuidadorRequiredMixin, View):
+    status_permitidos = {'aceitar': Agendamento.Status.ACEITO, 'recusar': Agendamento.Status.RECUSADO}
+
+    def post(self, request, pk, acao):
+        novo_status = self.status_permitidos.get(acao)
+        if not novo_status:
+            messages.error(request, "Ação inválida.")
+            return redirect('cuidador_solicitacoes')
+        with transaction.atomic():
+            agendamento = get_object_or_404(Agendamento.objects.select_for_update(), pk=pk, cuidador__usuario=request.user)
+            if agendamento.status != Agendamento.Status.PENDENTE:
+                messages.warning(request, "Esta solicitação já foi analisada e não pode ser alterada.")
+                return redirect('cuidador_solicitacao_detail', pk=agendamento.pk)
+            agendamento.status = novo_status
+            agendamento.save(update_fields=['status'])
+        messages.success(request, "Solicitação aceita com sucesso." if acao == 'aceitar' else "Solicitação recusada.")
+        return redirect('cuidador_solicitacao_detail', pk=agendamento.pk)
 
 
 class AvaliacaoCreateView(LoginRequiredMixin, CreateView):
