@@ -1,64 +1,59 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Dicas de cuidado | CuidaPet{% endblock %}
+{% block title %}Dicas | CuidaPet{% endblock %}
 
 {% block css %}
 <link rel="stylesheet" href="{% static 'css/dicas.css' %}" />
 {% endblock %}
 
 {% block content %}
-<section class="tips-page">
-  <div class="tips-hero">
-    <span class="tips-eyebrow"><i class="fa-solid fa-paw"></i> Bem-estar animal</span>
-    <h1>Dicas para cuidar melhor do seu pet</h1>
-    <p>Cuidados simples ajudam seu companheiro a viver com mais saúde, segurança e alegria.</p>
+<section class="dicas-container">
+  <h1>Dicas para cuidar do seu pet</h1>
+  <p class="introducao">Veja alguns cuidados importantes para manter seu animal saudável e feliz.</p>
+
+  <div class="lista-dicas">
+    <article class="dica">
+      <i class="fa-solid fa-bowl-food"></i>
+      <div>
+        <h2>Alimentação</h2>
+        <p>Dê uma ração adequada para a idade e o tamanho do animal. Também não se esqueça de deixar água limpa disponível.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-person-walking"></i>
+      <div>
+        <h2>Passeios e brincadeiras</h2>
+        <p>Os passeios e as brincadeiras fazem bem para a saúde e ajudam o pet a gastar energia.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-syringe"></i>
+      <div>
+        <h2>Saúde</h2>
+        <p>Mantenha as vacinas em dia e leve o animal ao veterinário sempre que perceber alguma mudança em seu comportamento.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-pump-soap"></i>
+      <div>
+        <h2>Higiene</h2>
+        <p>Cuide do banho, das unhas, dos dentes e da limpeza do local onde o pet dorme.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-house"></i>
+      <div>
+        <h2>Antes de deixar com um cuidador</h2>
+        <p>Explique a rotina do pet, os horários de alimentação, os remédios e deixe um telefone para contato.</p>
+      </div>
+    </article>
   </div>
 
-  <div class="tips-grid">
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-bowl-food"></i></span>
-      <h2>Alimentação</h2>
-      <p>Ofereça alimento adequado à espécie, idade e porte. Mantenha água limpa sempre disponível e evite comida humana sem orientação.</p>
-    </article>
-
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-person-walking"></i></span>
-      <h2>Atividade e brincadeiras</h2>
-      <p>Reserve momentos diários para passeios, brincadeiras e estímulos mentais, respeitando os limites e a rotina do animal.</p>
-    </article>
-
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-shield-dog"></i></span>
-      <h2>Segurança</h2>
-      <p>Use identificação na coleira, telas de proteção quando necessárias e guia nos passeios. Nunca deixe o pet sozinho no carro.</p>
-    </article>
-
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-syringe"></i></span>
-      <h2>Saúde preventiva</h2>
-      <p>Mantenha vacinas, vermífugos e controle de parasitas em dia. Consultas veterinárias periódicas ajudam a prevenir problemas.</p>
-    </article>
-
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-pump-soap"></i></span>
-      <h2>Higiene</h2>
-      <p>Cuide da higiene bucal, das unhas, orelhas e pelagem. Use somente produtos indicados para animais.</p>
-    </article>
-
-    <article class="tip-card">
-      <span class="tip-icon"><i class="fa-solid fa-hand-holding-heart"></i></span>
-      <h2>Antes da hospedagem</h2>
-      <p>Informe ao cuidador a rotina, medicações, alimentação, comportamento, contatos e dados do veterinário do seu pet.</p>
-    </article>
-  </div>
-
-  <aside class="alert-card">
-    <i class="fa-solid fa-triangle-exclamation"></i>
-    <div>
-      <h2>Quando procurar atendimento veterinário</h2>
-      <p>Dificuldade para respirar, desmaio, convulsão, sangramento intenso, intoxicação ou mudança brusca de comportamento exigem avaliação profissional. Estas dicas não substituem a orientação de um médico-veterinário.</p>
-    </div>
-  </aside>
+  <p class="aviso">Em caso de dúvida ou emergência, procure um médico-veterinário.</p>
 </section>
 {% endblock %}
