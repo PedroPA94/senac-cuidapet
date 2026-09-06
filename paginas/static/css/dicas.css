@@ -1,95 +1,71 @@
-.tips-page {
-  width: min(1120px, calc(100% - 40px));
-  margin: 48px auto;
+.dicas-container {
+  width: min(850px, calc(100% - 40px));
+  margin: 40px auto;
 }
 
-.tips-hero {
-  max-width: 720px;
-  margin-bottom: 32px;
-}
-
-.tips-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 10px;
+.dicas-container h1 {
   color: var(--color-primary);
-  font-weight: 700;
+  font-size: 2rem;
+  text-align: center;
 }
 
-.tips-hero h1 {
-  color: var(--color-text);
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.15;
-}
-
-.tips-hero p {
-  margin-top: 12px;
+.introducao {
+  margin: 8px 0 28px;
   color: var(--color-text-muted);
-  font-size: 1.05rem;
+  text-align: center;
 }
 
-.tips-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.lista-dicas {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
 }
 
-.tip-card {
-  padding: 24px;
+.dica {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  padding: 20px;
   background: var(--color-surface);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-sm);
   box-shadow: var(--shadow-sm);
 }
 
-.tip-icon {
-  display: grid;
-  place-items: center;
-  width: 48px;
-  height: 48px;
-  margin-bottom: 18px;
-  border-radius: 14px;
+.dica > i {
+  width: 30px;
+  margin-top: 4px;
   color: var(--color-primary);
-  background: var(--color-primary-soft);
-  font-size: 1.25rem;
+  font-size: 1.4rem;
+  text-align: center;
 }
 
-.tip-card h2,
-.alert-card h2 {
+.dica h2 {
+  margin-bottom: 5px;
   color: var(--color-text);
   font-size: 1.1rem;
 }
 
-.tip-card p,
-.alert-card p {
-  margin-top: 8px;
+.dica p {
   color: var(--color-text-muted);
-  line-height: 1.65;
+  line-height: 1.5;
 }
 
-.alert-card {
-  display: flex;
-  gap: 18px;
+.aviso {
   margin-top: 24px;
-  padding: 24px;
-  border: 1px solid #f8d7a5;
-  border-radius: var(--radius-lg);
+  padding: 15px;
+  color: var(--color-text-secondary);
   background: var(--color-warning-soft);
-}
-
-.alert-card > i {
-  color: var(--color-warning-hover);
-  font-size: 1.6rem;
-}
-
-@media (max-width: 900px) {
-  .tips-grid { grid-template-columns: repeat(2, 1fr); }
+  border-radius: var(--radius-sm);
+  text-align: center;
 }
 
 @media (max-width: 640px) {
-  .tips-page { width: min(100% - 28px, 1120px); margin: 32px auto; }
-  .tips-grid { grid-template-columns: 1fr; }
-  .alert-card { align-items: flex-start; }
-  .navbar-actions { gap: 0.75rem; }
+  .dicas-container {
+    width: calc(100% - 28px);
+    margin: 30px auto;
+  }
+
+  .dicas-container h1 {
+    font-size: 1.6rem;
+  }
 }
