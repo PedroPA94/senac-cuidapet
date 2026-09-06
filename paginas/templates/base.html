@@ -39,8 +39,9 @@
                 </span>
             </a>
         </div>
-        {% if user.is_authenticated %}
-            <nav class="navbar-actions">
+        <nav class="navbar-actions">
+            <a href="{% url 'dicas' %}" class="navbar-link">Dicas</a>
+            {% if user.is_authenticated %}
                 {% if user.tipo_usuario == 'CUIDADOR' %}
                     <a href="{% url 'cuidador_solicitacoes' %}" class="navbar-link">Solicitações e histórico</a>
                 {% else %}
@@ -50,12 +51,10 @@
                     {% csrf_token %}
                     <button type="submit" class="navbar-link navbar-logout">Sair</button>
                 </form>
-            </nav>
-        {% elif not user.is_authenticated %}
-            <a href="{% url 'login' %}" class="navbar-link">
-                Login
-            </a>
-        {% endif %}
+            {% else %}
+                <a href="{% url 'login' %}" class="navbar-link">Login</a>
+            {% endif %}
+        </nav>
     </header>
     
     <main>
