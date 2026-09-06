@@ -8,6 +8,7 @@ urlpatterns = [
     path('logout/', views.logout_view, name='logout'),
     path('cadastro/', views.cadastro, name='cadastro'),
     path('home/', views.home, name='home'),
+    path('dicas/', views.dicas, name='dicas'),
     
     # Cadastro Tutor
     path('tutor/register/', views.TutorCreateView.as_view(), name='tutor_create'),
