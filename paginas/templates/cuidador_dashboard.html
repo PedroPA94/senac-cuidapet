@@ -65,5 +65,78 @@
     </section>
   </div>
 </main>
+<dialog
+  class="reject-modal"
+  id="reject-confirmation-modal"
+  aria-labelledby="reject-modal-title"
+  aria-describedby="reject-modal-description"
+>
+  <div class="reject-modal-content">
+    <div class="reject-modal-copy">
+      <h2 id="reject-modal-title">Recusar atendimento?</h2>
+      <p id="reject-modal-description">
+        Tem certeza de que deseja recusar este atendimento? Esta ação não poderá ser desfeita.
+      </p>
+    </div>
+  </div>
+
+  <form method="post" id="reject-confirmation-form" class="reject-modal-actions">
+    {% csrf_token %}
+    <button type="button" class="dashboard-button button-cancel" id="reject-modal-cancel">Cancelar</button>
+    <button type="submit" class="dashboard-button button-reject-confirm" id="reject-modal-confirm" disabled>
+      Confirmar recusa
+    </button>
+  </form>
+</dialog>
+
+<script>
+  (() => {
+    const modal = document.getElementById('reject-confirmation-modal');
+    const form = document.getElementById('reject-confirmation-form');
+    const cancelButton = document.getElementById('reject-modal-cancel');
+    const confirmButton = document.getElementById('reject-modal-confirm');
+    const triggers = document.querySelectorAll('[data-reject-trigger]');
+    let activeTrigger = null;
+
+    function prepareRejection(trigger) {
+      activeTrigger = trigger;
+      form.action = trigger.dataset.rejectUrl;
+      confirmButton.disabled = false;
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        prepareRejection(trigger);
+
+        if (typeof modal.showModal === 'function') {
+          modal.showModal();
+          cancelButton.focus();
+          return;
+        }
+
+        if (window.confirm('Tem certeza de que deseja recusar este atendimento?')) {
+          form.requestSubmit();
+        }
+      });
+    });
+
+    cancelButton.addEventListener('click', () => modal.close());
+
+    modal.addEventListener('click', (event) => {
+      const bounds = modal.getBoundingClientRect();
+      const clickedOutside = event.clientX < bounds.left || event.clientX > bounds.right
+        || event.clientY < bounds.top || event.clientY > bounds.bottom;
+
+      if (clickedOutside) modal.close();
+    });
+
+    modal.addEventListener('close', () => {
+      form.removeAttribute('action');
+      confirmButton.disabled = true;
+      activeTrigger?.focus();
+      activeTrigger = null;
+    });
+  })();
+</script>
 {% endblock %}
 

@@ -26,10 +26,13 @@
             <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'aceitar' %}">
               {% csrf_token %}<button type="submit" class="dashboard-button button-accept">Aceitar</button>
             </form>
-            <form method="post" action="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}">
-              {% csrf_token %}<button type="submit" class="dashboard-button button-reject">Recusar</button>
-            </form>
-          {% endif %}
+             <button
+              type="button"
+              class="dashboard-button button-reject"
+              data-reject-trigger
+              data-reject-url="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}"
+            >Recusar</button>
+            {% endif %}
         </div>
       </article>
     {% endfor %}
