@@ -29,7 +29,7 @@
       <div><dt>Telefone</dt><dd>{{ agendamento.usuario.telefone|default:'Não informado' }}</dd></div>
     </dl></section>
 
-    {% if agendamento.status == 'ACEITO' %}
+    {% if agendamento.status == 'PENDENTE' %}
 
   <section class="decision-box">
     <div class="decision-content">
@@ -42,25 +42,25 @@
     <div class="decision-actions">
 
       <form method="post"
-            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'desistir' %}">
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'recusar' %}">
         {% csrf_token %}
         <button class="btn btn-reject" type="submit">
-          Desistir
+          Recusar
         </button>
       </form>
 
       <form method="post"
-            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'finalizar' %}">
+            action="{% url 'cuidador_solicitacao_status' agendamento.pk 'aceitar' %}">
         {% csrf_token %}
         <button class="btn btn-accept" type="submit">
-          Finalizar atendimento
+          Aceitar atendimento
         </button>
       </form>
 
     </div>
   </section>
 
-{% elif agendamento.status == 'A_ATENDER' %}
+{% elif agendamento.status == 'ACEITO' %}
 
   <section class="decision-box">
     <div class="decision-content">
