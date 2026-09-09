@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dicas | CuidaPet{% endblock %}
+
+{% block css %}
+<link rel="stylesheet" href="{% static 'css/dicas.css' %}" />
+{% endblock %}
+
+{% block content %}
+<section class="dicas-container">
+  <h1>Dicas para cuidar do seu pet</h1>
+  <p class="introducao">Veja alguns cuidados importantes para manter seu animal saudável e feliz.</p>
+
+  <div class="lista-dicas">
+    <article class="dica">
+      <i class="fa-solid fa-bowl-food"></i>
+      <div>
+        <h2>Alimentação</h2>
+        <p>Dê uma ração adequada para a idade e o tamanho do animal. Também não se esqueça de deixar água limpa disponível.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-person-walking"></i>
+      <div>
+        <h2>Passeios e brincadeiras</h2>
+        <p>Os passeios e as brincadeiras fazem bem para a saúde e ajudam o pet a gastar energia.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-syringe"></i>
+      <div>
+        <h2>Saúde</h2>
+        <p>Mantenha as vacinas em dia e leve o animal ao veterinário sempre que perceber alguma mudança em seu comportamento.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-pump-soap"></i>
+      <div>
+        <h2>Higiene</h2>
+        <p>Cuide do banho, das unhas, dos dentes e da limpeza do local onde o pet dorme.</p>
+      </div>
+    </article>
+
+    <article class="dica">
+      <i class="fa-solid fa-house"></i>
+      <div>
+        <h2>Antes de deixar com um cuidador</h2>
+        <p>Explique a rotina do pet, os horários de alimentação, os remédios e deixe um telefone para contato.</p>
+      </div>
+    </article>
+  </div>
+
+  <p class="aviso">Em caso de dúvida ou emergência, procure um médico-veterinário.</p>
+</section>
+{% endblock %}

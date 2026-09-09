@@ -64,6 +64,10 @@ def cadastro(request):
     return render(request, 'cadastro.html')
 
 
+def dicas(request):
+    return render(request, 'dicas.html')
+
+
 def home(request):
     uf_filtro = request.GET.get('uf', '')
     cidade_filtro = request.GET.get('cidade', '')
